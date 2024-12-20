@@ -1,3 +1,3 @@
-# Personal portfolioù
+# Personal portfolio
 
 Visit https://sandromikautadze.github.io
