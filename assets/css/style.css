@@ -1341,7 +1341,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .avatar-box img { width: 120px; }
 
-  .info-content .name { margin-bottom: 15px; }
+  .info-content .name { margin-bottom: 15px; font-size: 24px; }
 
   .info-content .title { padding: 5px 18px; }
 
