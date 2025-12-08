@@ -1828,7 +1828,23 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   /* portfolio and blog grid */
 
-  .project-list, .blog-posts-list { grid-template-columns: 1fr 1fr; }
+  .project-list { grid-template-columns: 1fr 1fr; }
+
+  .blog-posts-list { grid-template-columns: 1fr; }
+
+  .blog-post-item > a {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .blog-banner-box {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+  }
+
+  .blog-content { padding: 0; }
 
 
 
@@ -1956,7 +1972,10 @@ textarea.form-input::-webkit-resizer { display: none; }
    * BLOG
    */
 
-  .blog-banner-box { height: 230px; }
+  .blog-banner-box { 
+    width: 150px;
+    height: 150px; 
+  }
 
 }
 

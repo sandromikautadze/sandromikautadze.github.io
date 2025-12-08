@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <script defer data-domain="sandromikautadze.github.io" src="https://plausible.io/js/script.js"></script>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master's student in AI and Visual Computing at École Polytechnique"/>
+  <title>Sandro Mikautadze - Blog Post</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Markdown and MathJax support -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <style>
+    /* Basic styling for rendered markdown */
+    .blog-content-rendered {
+      color: var(--light-gray);
+      font-size: var(--fs-6);
+      font-weight: var(--fw-300);
+      line-height: 1.6;
+    }
+    .blog-content-rendered h1, 
+    .blog-content-rendered h2, 
+    .blog-content-rendered h3 {
+      color: var(--white-2);
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: var(--fw-600);
+    }
+    .blog-content-rendered h1 { font-size: var(--fs-1); }
+    .blog-content-rendered h2 { font-size: var(--fs-2); }
+    .blog-content-rendered h3 { font-size: var(--fs-4); }
+    
+    .blog-content-rendered p { margin-bottom: 15px; }
+    
+    .blog-content-rendered ul, 
+    .blog-content-rendered ol {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .blog-content-rendered li { margin-bottom: 5px; }
+    
+    .blog-content-rendered a {
+      color: var(--orange-yellow-crayola);
+      display: inline;
+    }
+    
+    .blog-content-rendered code {
+      background: var(--jet);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    
+    .blog-content-rendered pre {
+      background: var(--jet);
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 15px;
+    }
+    
+    .blog-content-rendered pre code {
+      background: transparent;
+      padding: 0;
+    }
+
+    .blog-content-rendered img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .back-btn {
+      color: var(--orange-yellow-crayola);
+      margin-bottom: 20px;
+      display: inline-block;
+      cursor: pointer;
+      font-size: var(--fs-6);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/profile.png" alt="Sandro Mikautadze" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Sandro Mikautadze">Sandro Mikautadze</h1>
+
+          <p class="title">AI & Visual Computing</p>
+        </div>
+
+        
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" class="social-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/italy.svg" alt="italy icon" width="30">
+              </div>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" class="social-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/georgia.svg" alt="georgia icon" width="30">
+              </div>
+            </a>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="mailto:sandromikautadze@yahoo.com" target="_blank" class="contact-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/email.svg" alt="email icon" width="30">
+              </div>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" class="social-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="30">
+              </div>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/sandromikautadze" target="_blank" class="social-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/github.svg" alt="github icon" width="28">
+              </div>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://medium.com/@sandromikautadze" target="_blank" class="social-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/medium.svg" alt="medium icon" width="30">
+              </div>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://bsky.app/profile/sandromikautadze.github.io" target="_blank" class="social-link">
+              <div class="service-icon-box">
+                <img src="./assets/icons/bluesky.svg" alt="bluesky icon" width="25">
+              </div>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link">About</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="resume.html" class="navbar-link">Resume</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="portfolio.html" class="navbar-link">Portfolio</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="blog.html" class="navbar-link active">Blog</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="contact.html" class="navbar-link">Contact</a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+      <!--
+        - #BLOG POST CONTENT
+      -->
+
+      <article class="blog active" data-page="blog">
+
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+        </header>
+
+        <section class="blog-posts">
+          <a href="blog.html" class="back-btn">← Back</a>
+
+          <h1 id="post-title" style="margin-top: 10px; margin-bottom: 20px; color: var(--white-2); font-size: var(--fs-1); font-weight: var(--fw-600);">Loading...</h1>
+          
+          <div id="post-content" class="blog-content-rendered">
+            <!-- Markdown content will be injected here -->
+            <div style="text-align: center; padding: 20px;">
+              <ion-icon name="reload-outline" class="spin" style="font-size: 30px;"></ion-icon>
+            </div>
+          </div>
+
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Post loading logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the 'slug' parameter from the URL (support both query param and hash)
+      const urlParams = new URLSearchParams(window.location.search);
+      let slug = urlParams.get('slug');
+
+      // Fallback to hash if query param is missing
+      if (!slug && window.location.hash) {
+        slug = window.location.hash.substring(1);
+      }
+
+      if (!slug) {
+        document.getElementById('post-title').innerText = 'Post not found';
+        document.getElementById('post-content').innerHTML = `
+          <p>No post specified.</p>
+          <p style="font-size: 0.8em; color: #666;">Debug info: URL is ${window.location.href}</p>
+        `;
+        return;
+      }
+
+      // Check for file protocol and warn about CORS
+      if (window.location.protocol === 'file:') {
+         const warning = document.createElement('div');
+         warning.style.background = 'rgba(255, 204, 0, 0.1)';
+         warning.style.border = '1px solid #ffcc00';
+         warning.style.color = '#ffcc00';
+         warning.style.padding = '15px';
+         warning.style.borderRadius = '10px';
+         warning.style.marginBottom = '20px';
+         warning.innerHTML = '<strong>Note:</strong> You are viewing this file locally. If the content below does not load, it is likely because browsers block loading external files (like the blog post markdown) when using the <code>file://</code> protocol. Please use a local web server (like the "Live Server" extension in VS Code) or view this page on GitHub Pages.';
+         document.querySelector('.blog-posts').insertBefore(warning, document.getElementById('post-content'));
+      }
+
+      // Fetch the markdown file
+      fetch(`./assets/posts/${slug}.md`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Post not found');
+          }
+          return response.text();
+        })
+        .then(text => {
+          // Parse markdown
+          const htmlContent = marked.parse(text);
+          document.getElementById('post-content').innerHTML = htmlContent;
+          
+          // Extract title from the first h1 if present, otherwise use slug
+          const firstH1 = document.querySelector('#post-content h1');
+          if (firstH1) {
+            document.getElementById('post-title').innerText = firstH1.innerText;
+            firstH1.remove(); // Remove the h1 from content as it's now the page title
+          } else {
+            document.getElementById('post-title').innerText = slug.replace(/-/g, ' ');
+          }
+
+          // Trigger MathJax to render math in the new content
+          if (window.MathJax) {
+            MathJax.typesetPromise([document.getElementById('post-content')]);
+          }
+        })
+        .catch(error => {
+          console.error('Error loading post:', error);
+          document.getElementById('post-title').innerText = 'Error';
+          document.getElementById('post-content').innerHTML = '<p>Could not load the blog post. Please check if the file exists.</p>';
+        });
+    });
+  </script>
+
+</body>
+
+</html>
