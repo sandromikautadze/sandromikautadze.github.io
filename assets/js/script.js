@@ -84,33 +84,36 @@ if (revealEls.length) {
 
 
 
-// hero avatar: shrinks in place (no repositioning) as the hero scrolls by.
-// Plain transform:scale on a normal in-flow image, bounded to the hero's own
-// scroll extent, no fixed positioning and nothing else depends on it.
-const heroAvatar = document.querySelector("[data-hero-avatar]");
+// hero content: as you scroll through the hero, it rises a bit faster than
+// the scroll itself and shrinks slightly. Plain transform, no repositioning
+// beyond that and no scroll-lock, so it reads as one continuous motion into
+// Bio rather than a static block that just disappears.
+const heroContentForScale = document.querySelector(".hero-content");
 const heroElForScale = document.querySelector(".hero");
 
-if (heroAvatar && heroElForScale && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+if (heroContentForScale && heroElForScale && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   let scaleTicking = false;
 
-  function updateHeroAvatarScale() {
+  function updateHeroContentScale() {
     scaleTicking = false;
     const heroRect = heroElForScale.getBoundingClientRect();
     const progress = Math.min(1, Math.max(0, -heroRect.top / heroRect.height));
-    heroAvatar.style.transform = "scale(" + (1 - progress * 0.5) + ")";
+    heroContentForScale.style.transform = "translateY(" + (-progress * 160) + "px) scale(" + (1 - progress * 0.2) + ")";
   }
 
   function requestScaleUpdate() {
     if (!scaleTicking) {
       scaleTicking = true;
-      requestAnimationFrame(updateHeroAvatarScale);
+      requestAnimationFrame(updateHeroContentScale);
     }
   }
 
   window.addEventListener("scroll", requestScaleUpdate, { passive: true });
   window.addEventListener("resize", requestScaleUpdate);
-  updateHeroAvatarScale();
+  updateHeroContentScale();
 }
+
+
 
 
 
@@ -128,8 +131,6 @@ if (heroAvatar && heroElForScale && !window.matchMedia("(prefers-reduced-motion:
   const generateCanvas = document.querySelector("[data-generate-canvas]");
   const generateSnippets = document.querySelector("[data-generate-snippets]");
   const scrollHint = document.querySelector("[data-scroll-hint]");
-  const fogLayer = document.querySelector("[data-fog-layer]");
-  const fogEl = document.querySelector("[data-fog]");
   const heroEl = document.querySelector(".hero");
   const siteHeader = document.querySelector("[data-site-header]");
   const siteFooter = document.querySelector("[data-site-footer]");
@@ -177,7 +178,6 @@ if (heroAvatar && heroElForScale && !window.matchMedia("(prefers-reduced-motion:
   // Either way, skip the button/spectacle and just show the site plainly.
   if (alreadyGenerated || prefersReducedMotion) {
     generateBtn.hidden = true;
-    if (fogLayer) fogLayer.hidden = true;
     revealContentSections();
     showPlain(siteHeader);
     showPlain(siteFooter);
@@ -185,19 +185,6 @@ if (heroAvatar && heroElForScale && !window.matchMedia("(prefers-reduced-motion:
     if (!alreadyGenerated) markGenerated();
     updateHeaderScrollOffset();
     return;
-  }
-
-  // mystical fog: a small radius around the cursor "wipes clean" a layer of
-  // true facts about me, hidden behind an otherwise opaque cover. Listens on
-  // .hero (not fogLayer itself): fogLayer and hero-content are siblings, so
-  // movement over the button/avatar/text would never bubble to fogLayer.
-  // CSS alone hides this on touch devices; the listener is harmless there.
-  if (heroEl && fogLayer && fogEl) {
-    heroEl.addEventListener("mousemove", function (e) {
-      const rect = fogLayer.getBoundingClientRect();
-      fogEl.style.setProperty("--fog-x", (e.clientX - rect.left) + "px");
-      fogEl.style.setProperty("--fog-y", (e.clientY - rect.top) + "px");
-    });
   }
 
   const CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -389,7 +376,6 @@ if (heroAvatar && heroElForScale && !window.matchMedia("(prefers-reduced-motion:
 
   generateBtn.addEventListener("click", function () {
     generateBtn.hidden = true;
-    if (fogLayer) fogLayer.hidden = true;
 
     generateStatus.hidden = false;
     renderStatus(0);

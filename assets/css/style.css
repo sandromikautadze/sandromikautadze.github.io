@@ -228,7 +228,7 @@ img { display: block; max-width: 100%; }
  */
 
 .reveal {
-  margin-bottom: 64px;
+  margin-bottom: 40px;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity var(--transition-2), transform var(--transition-2);
@@ -384,20 +384,6 @@ main {
   #HERO / ABOUT
 \*-----------------------------------*/
 
-/* registering these as <length> lets the browser interpolate them across a
-   transition, which is what makes the fog glide instead of jumping */
-@property --fog-x {
-  syntax: '<length>';
-  inherits: true;
-  initial-value: -9999px;
-}
-
-@property --fog-y {
-  syntax: '<length>';
-  inherits: true;
-  initial-value: -9999px;
-}
-
 .hero {
   /* cancel main's own top padding so this 100vh box starts right at the
      header's bottom edge; otherwise its centered content lands well below
@@ -407,55 +393,24 @@ main {
   min-height: 100svh;
   position: relative;
   overflow: hidden;
-}
-
-/**
- * fog layer: true facts about me, hidden behind an opaque cover that the
- * mouse "wipes clean" in a small radius. Desktop/pointer:fine only; touch
- * devices get the plain hero with no fog at all (see reduced-motion-style
- * media guard below).
- */
-
-.hero-fog-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.hero-hint {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  color: var(--text-muted);
-  font-size: var(--fs-7);
-  font-style: italic;
-  white-space: nowrap;
-}
-
-.hero-fog {
-  position: absolute;
-  inset: 0;
-  background: var(--bg);
-  -webkit-mask-image: radial-gradient(circle 170px at var(--fog-x, -9999px) var(--fog-y, -9999px), transparent 0%, transparent 35%, black 100%);
-  mask-image: radial-gradient(circle 170px at var(--fog-x, -9999px) var(--fog-y, -9999px), transparent 0%, transparent 35%, black 100%);
-  /* --fog-x/y are registered below as animatable <length>s so this glides
-     behind the cursor instead of snapping frame to frame */
-  transition: --fog-x 0.15s linear, --fog-y 0.15s linear;
-}
-
-@media (hover: none), (pointer: coarse) {
-  .hero-fog-layer { display: none; }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-content {
   position: relative;
   z-index: 3;
-  min-height: 100vh;
-  min-height: 100svh;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* moves up a bit faster than the scroll itself and shrinks slightly as
+     you scroll through the hero (see script.js) — Bio catching up on a
+     content block that's already rising and shrinking reads as one
+     continuous motion rather than a static block that just disappears */
+  transition: transform 0.1s linear;
 }
 
 .hero-avatar {
@@ -465,7 +420,6 @@ main {
   object-fit: cover;
   border: 1px solid var(--border);
   margin-bottom: 20px;
-  transition: transform 0.1s linear;
 }
 
 .hero-name {
@@ -1065,6 +1019,6 @@ main {
     height: 160px;
   }
 
-  .reveal { margin-bottom: 76px; }
+  .reveal { margin-bottom: 52px; }
 
 }
