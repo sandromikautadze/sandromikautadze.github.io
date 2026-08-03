@@ -8,417 +8,261 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Master's student in AI and Visual Computing at École Polytechnique"/>
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f2ec">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151311">
+  <meta name="description" content="AI Researcher working on interpretability of vision-language models."/>
   <title>Sandro Mikautadze - Blog</title>
 
-  <!--
-    - favicon
-  -->
   <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
-
-  <!--
-    - custom css link
-  -->
+  <link rel="preload" href="./assets/fonts/poppins-300.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-400.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-500.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-600.woff2" as="font" type="font/woff2">
   <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!--
-    - #MAIN
-  -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="brand">Sandro Mikautadze</a>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link">About</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="cv.html" class="nav-link">CV</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
+    <div class="container">
 
-    <!--
-      - #SIDEBAR
-    -->
+      <h1 class="section-title">Blog</h1>
 
-    <aside class="sidebar" data-sidebar>
+      <ul class="blog-posts-list">
 
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/profile.png" alt="Sandro Mikautadze" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Sandro Mikautadze">Sandro Mikautadze</h1>
-
-          <p class="title">AI & Visual Computing</p>
-        </div>
-
-        
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/italy.svg" alt="italy icon" width="30">
+        <li class="blog-post-item entrance-item">
+          <a href="post.html#latex-test">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
               </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/georgia.svg" alt="georgia icon" width="30">
+              <img src="./assets/images/latex-test.svg" alt="LaTeX Rendering Test" width="112" height="112" loading="eager">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2026-08-03">Aug 3, 2026</time>
               </div>
-            </a>
-          </li>
+              <h2 class="blog-item-title">LaTeX Rendering Test</h2>
+            </div>
+          </a>
+        </li>
 
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="mailto:sandromikautadze@yahoo.com" target="_blank" class="contact-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/email.svg" alt="email icon" width="30">
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/is-bocconis-ai-degree-bai-worth-it-03809bc68ef8" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
               </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="30">
+              <img src="./assets/images/bocconi.jpg" alt="team" width="112" height="112" loading="eager">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2025-09-14">Sept 14, 2025</time>
               </div>
-            </a>
-          </li>
+              <h2 class="blog-item-title">Is Bocconi's AI Degree (BAI) Worth It?</h2>
+            </div>
+          </a>
+        </li>
 
-          <li class="social-item">
-            <a href="https://github.com/sandromikautadze" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/github.svg" alt="github icon" width="28">
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/my-first-hackathon-508ebcab7529" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
               </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://medium.com/@sandromikautadze" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/medium.svg" alt="medium icon" width="30">
+              <img src="./assets/images/team.jpg" alt="team" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2025-02-04">Feb 4, 2025</time>
               </div>
-            </a>
-          </li>
+              <h2 class="blog-item-title">My First Hackathon</h2>
+            </div>
+          </a>
+        </li>
 
-          <li class="social-item">
-            <a href="https://bsky.app/profile/sandromikautadze.github.io" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/bluesky.svg" alt="bluesky icon" width="25">
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/read-these-papers-if-you-want-to-understand-diffusion-models-545a3639ca3c" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
               </div>
-            </a>
-          </li>
+              <img src="./assets/images/diffusion.jpg" alt="diffusion" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2025-01-14">Jan 14, 2025</time>
+              </div>
+              <h2 class="blog-item-title">Read These Papers If You Want to Understand Diffusion Models</h2>
+            </div>
+          </a>
+        </li>
 
-        </ul>
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/ai-advances/some-random-thoughts-on-ai-d14db44c055c" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/thoughts.jpg" alt="thoughts" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2023-11-29">Nov 29, 2023</time>
+              </div>
+              <h2 class="blog-item-title">Some Random Thoughts on AI</h2>
+            </div>
+          </a>
+        </li>
 
-      </div>
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/assisted-not-automated-striking-a-balance-in-decision-making-with-ai-5c7a87578f19" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/assisted.jpg" alt="assisted" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2023-05-28">May 28, 2023</time>
+              </div>
+              <h2 class="blog-item-title">Assisted, not Automated: Striking a Balance in Decision-Making with AI</h2>
+            </div>
+          </a>
+        </li>
 
-    </aside>
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/killer-robots-the-true-danger-of-ai-52c924e6cd7" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/robots.jpg" alt="robots" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2022-10-11">Oct 11, 2022</time>
+              </div>
+              <h2 class="blog-item-title">Killer Robots: The True Danger of AI</h2>
+            </div>
+          </a>
+        </li>
 
-    <!--
-      - #main-content
-    -->
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/why-deepmind-is-the-god-father-of-ai-innovation-e54bb0148ed7" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/deepmind.jpg" alt="deepmind" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2022-08-18">Aug 18, 2022</time>
+              </div>
+              <h2 class="blog-item-title">Why DeepMind Is the (God)father of AI Innovation</h2>
+            </div>
+          </a>
+        </li>
 
-    <div class="main-content">
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/@sandromikautadze/the-art-of-artificial-intelligence-4b16b36df1bc" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/art.jpg" alt="art" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2022-07-23">Jul 23, 2022</time>
+              </div>
+              <h2 class="blog-item-title">What Is the Art of Artificial Intelligence?</h2>
+            </div>
+          </a>
+        </li>
 
-      <!--
-        - #NAVBAR
-      -->
+        <li class="blog-post-item entrance-item">
+          <a href="https://medium.com/design-bootcamp/why-tiktok-is-not-optimized-for-humans-c111f91b3dbf" target="_blank">
+            <figure class="blog-banner-box">
+              <div class="blog-item-icon-box">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/tiktok.jpg" alt="tiktok" width="112" height="112" loading="lazy">
+            </figure>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="dot"></span>
+                <time datetime="2022-07-08">Jul 8, 2022</time>
+              </div>
+              <h2 class="blog-item-title">Why TikTok is NOT optimized for humans</h2>
+            </div>
+          </a>
+        </li>
 
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <a href="index.html" class="navbar-link">About</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="resume.html" class="navbar-link">Resume</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="portfolio.html" class="navbar-link">Portfolio</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="blog.html" class="navbar-link active">Blog</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="contact.html" class="navbar-link">Contact</a>
-          </li>
-
-        </ul>
-
-      </nav>
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog active" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="post.html#gmm">
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/gmm.png" alt="GMM Blog Post" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <span class="dot"></span>
-                    <time datetime="2023-10-27">DATE</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Gaussian Mixture Models</h3>
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/is-bocconis-ai-degree-bai-worth-it-03809bc68ef8" target="_blank">
-                
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/bocconi.png" alt="team" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2023-11-29">Sept 14, 2025</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Is Bocconi's AI Degree (BAI) Worth It?</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/my-first-hackathon-508ebcab7529" target="_blank">
-                
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/team.jpg" alt="team" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2023-11-29">Feb 4, 2025</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">My First Hackathon</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/read-these-papers-if-you-want-to-understand-diffusion-models-545a3639ca3c" target="_blank">
-                
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/diffusion.jpg" alt="diffusion" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2023-11-29">Jan 14, 2025</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Read These Papers If You Want to Understand Diffusion Models</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/ai-advances/some-random-thoughts-on-ai-d14db44c055c" target="_blank">
-                
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/thoughts.jpg" alt="thoughts" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2023-11-29">Nov 29, 2023</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Some Random Thoughts on AI</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/assisted-not-automated-striking-a-balance-in-decision-making-with-ai-5c7a87578f19" target="_blank">
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/assisted.jpg" alt="assisted" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2023-05-28">May 28, 2023</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Assisted, not Automated: Striking a Balance in Decision-Making with AI</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/killer-robots-the-true-danger-of-ai-52c924e6cd7" target="_blank">
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/robots.jpg" alt="robots" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2022-10-11">Oct 11, 2022</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Killer Robots: The True Danger of AI</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li> 
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/why-deepmind-is-the-god-father-of-ai-innovation-e54bb0148ed7" target="_blank">
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/deepmind.jpg" alt="deepmind" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2022-08-18">Aug 18, 2022</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Why DeepMind Is the (God)father of AI Innovation</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>   
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@sandromikautadze/the-art-of-artificial-intelligence-4b16b36df1bc" target="_blank">
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/art.jpg" alt="art" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2022-07-23">Jul 23, 2022</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">What Is the Art of Artificial Intelligence?</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>     
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/design-bootcamp/why-tiktok-is-not-optimized-for-humans-c111f91b3dbf" target="_blank">
-                <figure class="blog-banner-box">
-                  <div class="blog-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/tiktok.jpg" alt="tiktok" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <!-- <p class="blog-category"></p> -->
-                    <span class="dot"></span>
-                    <time datetime="2022-07-8">Jul 8, 2022</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">Why TikTok is NOT optimized for humans</h3>
-                  <!-- <p class="blog-text">
-                  </p> -->
-                </div>
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
+      </ul>
 
     </div>
-
   </main>
 
-  <!--
-    - custom js link
-  -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+
+      <div class="footer-flags">
+        <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" aria-label="Italy">
+          <img src="./assets/icons/italy.svg" alt="italy icon" width="20">
+        </a>
+        <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" aria-label="Georgia">
+          <img src="./assets/icons/georgia.svg" alt="georgia icon" width="20">
+        </a>
+      </div>
+
+      <div class="footer-social">
+        <a href="mailto:sandromikautadze@yahoo.com" target="_blank" aria-label="Email">
+          <img src="./assets/icons/email.svg" alt="email icon" width="18">
+        </a>
+        <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" aria-label="LinkedIn">
+          <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="18">
+        </a>
+        <a href="https://github.com/sandromikautadze" target="_blank" aria-label="GitHub">
+          <img src="./assets/icons/github.svg" alt="github icon" width="18">
+        </a>
+        <a href="https://medium.com/@sandromikautadze" target="_blank" aria-label="Medium">
+          <img src="./assets/icons/medium.svg" alt="medium icon" width="18">
+        </a>
+        <a href="https://x.com/theaitemp" target="_blank" aria-label="X">
+          <img src="./assets/icons/x.svg" alt="x icon" width="18">
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
   <script src="./assets/js/script.js"></script>
 
-  <!--
-    - ionicon link
-  -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

@@ -8,28 +8,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Master's student in AI and Visual Computing at École Polytechnique"/>
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f2ec">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151311">
+  <meta name="description" content="AI Researcher working on interpretability of vision-language models."/>
   <title>Sandro Mikautadze - Blog Post</title>
 
-  <!--
-    - favicon
-  -->
   <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
-
-  <!--
-    - custom css link
-  -->
+  <link rel="preload" href="./assets/fonts/poppins-300.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-400.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-500.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-600.woff2" as="font" type="font/woff2">
   <link rel="stylesheet" href="./assets/css/style.css">
 
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
   <!-- Markdown and MathJax support -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     MathJax = {
       tex: {
@@ -38,19 +30,19 @@
     };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  
+
   <style>
     /* Basic styling for rendered markdown */
     .blog-content-rendered {
-      color: var(--light-gray);
+      color: var(--text-muted);
       font-size: var(--fs-6);
       font-weight: var(--fw-300);
       line-height: 1.6;
     }
-    .blog-content-rendered h1, 
-    .blog-content-rendered h2, 
+    .blog-content-rendered h1,
+    .blog-content-rendered h2,
     .blog-content-rendered h3 {
-      color: var(--white-2);
+      color: var(--text);
       margin-top: 20px;
       margin-bottom: 10px;
       font-weight: var(--fw-600);
@@ -58,37 +50,38 @@
     .blog-content-rendered h1 { font-size: var(--fs-1); }
     .blog-content-rendered h2 { font-size: var(--fs-2); }
     .blog-content-rendered h3 { font-size: var(--fs-4); }
-    
+
     .blog-content-rendered p { margin-bottom: 15px; }
-    
-    .blog-content-rendered ul, 
+
+    .blog-content-rendered ul,
     .blog-content-rendered ol {
       margin-left: 20px;
       margin-bottom: 15px;
     }
-    
+
     .blog-content-rendered li { margin-bottom: 5px; }
-    
+
     .blog-content-rendered a {
-      color: var(--orange-yellow-crayola);
+      color: var(--accent);
       display: inline;
     }
-    
+
     .blog-content-rendered code {
-      background: var(--jet);
+      background: var(--accent-soft);
       padding: 2px 5px;
       border-radius: 4px;
-      font-family: monospace;
+      font-family: var(--ff-mono);
     }
-    
+
     .blog-content-rendered pre {
-      background: var(--jet);
+      background: var(--accent-soft);
       padding: 15px;
       border-radius: 8px;
       overflow-x: auto;
       margin-bottom: 15px;
+      border: 1px solid var(--border);
     }
-    
+
     .blog-content-rendered pre code {
       background: transparent;
       padding: 0;
@@ -101,7 +94,7 @@
     }
 
     .back-btn {
-      color: var(--orange-yellow-crayola);
+      color: var(--accent);
       margin-bottom: 20px;
       display: inline-block;
       cursor: pointer;
@@ -112,195 +105,95 @@
 
 <body>
 
-  <!--
-    - #MAIN
-  -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="index.html" class="brand">Sandro Mikautadze</a>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link">About</a>
+        <a href="blog.html" class="nav-link active">Blog</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="cv.html" class="nav-link">CV</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
+    <div class="container blog-posts">
 
-    <!--
-      - #SIDEBAR
-    -->
+      <a href="blog.html" class="back-btn">← Back</a>
 
-    <aside class="sidebar" data-sidebar>
+      <h1 id="post-title" style="margin-top: 10px; margin-bottom: 20px; color: var(--text); font-size: var(--fs-1); font-weight: var(--fw-600);">Loading...</h1>
 
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/profile.png" alt="Sandro Mikautadze" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Sandro Mikautadze">Sandro Mikautadze</h1>
-
-          <p class="title">AI & Visual Computing</p>
+      <div id="post-content" class="blog-content-rendered">
+        <!-- Markdown content will be injected here -->
+        <div style="text-align: center; padding: 20px;">
+          <ion-icon name="reload-outline" class="spin" style="font-size: 30px;"></ion-icon>
         </div>
-
-        
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
       </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/italy.svg" alt="italy icon" width="30">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/georgia.svg" alt="georgia icon" width="30">
-              </div>
-            </a>
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="mailto:sandromikautadze@yahoo.com" target="_blank" class="contact-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/email.svg" alt="email icon" width="30">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="30">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://github.com/sandromikautadze" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/github.svg" alt="github icon" width="28">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://medium.com/@sandromikautadze" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/medium.svg" alt="medium icon" width="30">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://bsky.app/profile/sandromikautadze.github.io" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/bluesky.svg" alt="bluesky icon" width="25">
-              </div>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <a href="index.html" class="navbar-link">About</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="resume.html" class="navbar-link">Resume</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="portfolio.html" class="navbar-link">Portfolio</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="blog.html" class="navbar-link active">Blog</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="contact.html" class="navbar-link">Contact</a>
-          </li>
-
-        </ul>
-
-      </nav>
-
-      <!--
-        - #BLOG POST CONTENT
-      -->
-
-      <article class="blog active" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-          <a href="blog.html" class="back-btn">← Back</a>
-
-          <h1 id="post-title" style="margin-top: 10px; margin-bottom: 20px; color: var(--white-2); font-size: var(--fs-1); font-weight: var(--fw-600);">Loading...</h1>
-          
-          <div id="post-content" class="blog-content-rendered">
-            <!-- Markdown content will be injected here -->
-            <div style="text-align: center; padding: 20px;">
-              <ion-icon name="reload-outline" class="spin" style="font-size: 30px;"></ion-icon>
-            </div>
-          </div>
-
-        </section>
-
-      </article>
 
     </div>
-
   </main>
 
-  <!--
-    - custom js link
-  -->
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+
+      <div class="footer-flags">
+        <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" aria-label="Italy">
+          <img src="./assets/icons/italy.svg" alt="italy icon" width="20">
+        </a>
+        <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" aria-label="Georgia">
+          <img src="./assets/icons/georgia.svg" alt="georgia icon" width="20">
+        </a>
+      </div>
+
+      <div class="footer-social">
+        <a href="mailto:sandromikautadze@yahoo.com" target="_blank" aria-label="Email">
+          <img src="./assets/icons/email.svg" alt="email icon" width="18">
+        </a>
+        <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" aria-label="LinkedIn">
+          <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="18">
+        </a>
+        <a href="https://github.com/sandromikautadze" target="_blank" aria-label="GitHub">
+          <img src="./assets/icons/github.svg" alt="github icon" width="18">
+        </a>
+        <a href="https://medium.com/@sandromikautadze" target="_blank" aria-label="Medium">
+          <img src="./assets/icons/medium.svg" alt="medium icon" width="18">
+        </a>
+        <a href="https://x.com/theaitemp" target="_blank" aria-label="X">
+          <img src="./assets/icons/x.svg" alt="x icon" width="18">
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
   <script src="./assets/js/script.js"></script>
 
-  <!--
-    - ionicon link
-  -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <!-- Post loading logic -->
   <script>
+    // Markdown treats underscores as emphasis, which mangles LaTeX subscripts
+    // like z_i before MathJax ever sees them. Swap $...$ and $$...$$ spans for
+    // plain placeholders before parsing, then restore the raw math afterwards.
+    function protectMath(text) {
+      const store = [];
+      const stash = (match) => {
+        store.push(match);
+        return `@@MATH${store.length - 1}@@`;
+      };
+      return {
+        text: text.replace(/\$\$[\s\S]+?\$\$/g, stash).replace(/\$[^$\n]+?\$/g, stash),
+        store
+      };
+    }
+
+    function restoreMath(html, store) {
+      return html.replace(/@@MATH(\d+)@@/g, (_, i) => store[Number(i)]);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       // Get the 'slug' parameter from the URL (support both query param and hash)
       const urlParams = new URLSearchParams(window.location.search);
@@ -342,10 +235,11 @@
           return response.text();
         })
         .then(text => {
-          // Parse markdown
-          const htmlContent = marked.parse(text);
+          // Parse markdown, keeping LaTeX math spans intact
+          const { text: guardedText, store } = protectMath(text);
+          const htmlContent = restoreMath(marked.parse(guardedText), store);
           document.getElementById('post-content').innerHTML = htmlContent;
-          
+
           // Extract title from the first h1 if present, otherwise use slug
           const firstH1 = document.querySelector('#post-content h1');
           if (firstH1) {
@@ -355,9 +249,13 @@
             document.getElementById('post-title').innerText = slug.replace(/-/g, ' ');
           }
 
-          // Trigger MathJax to render math in the new content
-          if (window.MathJax) {
-            MathJax.typesetPromise([document.getElementById('post-content')]);
+          // Trigger MathJax to render math in the new content. MathJax loads
+          // asynchronously, so wait for its own startup promise rather than
+          // calling typesetPromise before it exists.
+          if (window.MathJax && MathJax.startup) {
+            MathJax.startup.promise.then(() => {
+              MathJax.typesetPromise([document.getElementById('post-content')]);
+            });
           }
         })
         .catch(error => {

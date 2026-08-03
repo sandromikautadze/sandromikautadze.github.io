@@ -9,436 +9,223 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Master's student in AI and Visual Computing at École Polytechnique"/>
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f2ec">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151311">
+  <meta name="description" content="AI Researcher working on interpretability of vision-language models."/>
   <title>Sandro Mikautadze</title>
 
-  <!--
-    - favicon
-  -->
   <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
-
-  <!--
-    - custom css link
-  -->
+  <link rel="preload" href="./assets/fonts/poppins-300.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-400.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-500.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="./assets/fonts/poppins-600.woff2" as="font" type="font/woff2">
   <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!--
-    - #MAIN
-  -->
+  <header class="site-header" data-site-header hidden>
+    <div class="site-header-inner">
+      <a href="index.html" class="brand">Sandro Mikautadze</a>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link active">About</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="cv.html" class="nav-link">CV</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
 
   <main>
+    <div class="container">
 
-    <!--
-      - #SIDEBAR
-    -->
+      <section class="hero">
 
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/profile.png" alt="Sandro Mikautadze" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Sandro Mikautadze">Sandro Mikautadze</h1>
-
-          <p class="title">AI & Visual Computing</p>
+        <div class="hero-fog-layer" data-fog-layer>
+          <span class="hero-hint" style="top: 14%; left: 10%;">Vision Modality</span>
+          <span class="hero-hint" style="top: 72%; left: 16%;">Model Interpretability</span>
+          <span class="hero-hint" style="top: 20%; left: 76%;">École Polytechnique</span>
+          <span class="hero-hint" style="top: 66%; left: 80%;">Bocconi University</span>
+          <span class="hero-hint" style="top: 42%; left: 6%;">Georgian, allegedly</span>
+          <span class="hero-hint" style="top: 88%; left: 48%;">forza Inter</span>
+          <span class="hero-hint" style="top: 10%; left: 46%;">Doctolib</span>
+          <span class="hero-hint" style="top: 46%; left: 90%;">AI since 2019</span>
+          <div class="hero-fog" data-fog></div>
         </div>
 
-        
+        <div class="hero-content">
 
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
+          <canvas class="generate-canvas" data-generate-canvas hidden></canvas>
+          <div class="generate-snippets" data-generate-snippets hidden></div>
 
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
+          <img src="./assets/images/profile.png" alt="Sandro Mikautadze" class="hero-avatar" data-hero-avatar width="170" height="170">
 
-      </div>
+          <h1 class="hero-name">Sandro Mikautadze</h1>
+          <p class="hero-tag">AI Researcher</p>
 
-      <div class="sidebar-info_more">
+          <button type="button" class="generate-btn" data-generate-btn>Generate webpage</button>
 
-        <div class="separator"></div>
+          <p class="generate-status" data-generate-status hidden></p>
 
-        <ul class="social-list">
+          <a href="#bio" class="scroll-hint" data-scroll-hint hidden>
+            <span class="scroll-hint-text">Scroll down</span>
+            <svg class="scroll-hint-arrow" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
 
-          <li class="social-item">
-            <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/italy.svg" alt="italy icon" width="30">
-              </div>
-            </a>
-          </li>
+        </div>
 
-          <li class="social-item">
-            <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/georgia.svg" alt="georgia icon" width="30">
-              </div>
-            </a>
-          </li>
+      </section>
 
+      <section class="reveal" data-reveal id="bio" hidden>
+
+        <h2 class="section-title">Bio</h2>
+
+        <div class="body-text">
+
+          <p>I am Italian, and, according to trust-me-bro science, also Georgian.</p>
+
+          <p>I decided to study AI in 2019 and wrote my first lines of code at 12. These days, thanks to AI, I mostly feel dumb.</p>
+
+          <p>I am currently pursuing a Master's degree in Artificial Intelligence and Advanced Visual Computing at École Polytechnique, with coursework spanning deep learning, computer vision, reinforcement learning, and their applications in 3D graphics, virtual and augmented reality, generative AI, autonomous driving, and robotics.</p>
+
+          <p>Before that, I completed a Bachelor's degree in Mathematical and Computing Sciences for Artificial Intelligence at Bocconi University, which gave me a rigorous grounding in mathematics and computer science alongside physics, neuroscience, and economics.</p>
+
+        </div>
+
+      </section>
+
+      <section class="reveal" data-reveal hidden>
+
+        <h2 class="section-title">Work</h2>
+
+        <div class="body-text">
+          <p>
+            My research interests currently sit along two axes, vision modality and model interpretability.
+            The application layer that excites me most is still to be determined, but I am, generally, a very curious person.
+          </p>
+        </div>
+
+        <ul class="research-axes">
+          <li class="axis-item">Vision Modality</li>
+          <li class="axis-item">Model Interpretability</li>
         </ul>
 
-        <div class="separator"></div>
+      </section>
 
-        <ul class="social-list">
+      <section class="reveal" data-reveal hidden>
 
-          <li class="social-item">
-            <a href="mailto:sandromikautadze@yahoo.com" target="_blank" class="contact-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/email.svg" alt="email icon" width="30">
-              </div>
-            </a>
-          </li>
+        <h2 class="section-title">News</h2>
 
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="30">
-              </div>
-            </a>
-          </li>
+        <ol class="timeline-list">
 
-          <li class="social-item">
-            <a href="https://github.com/sandromikautadze" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/github.svg" alt="github icon" width="28">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://medium.com/@sandromikautadze" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/medium.svg" alt="medium icon" width="30">
-              </div>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://bsky.app/profile/sandromikautadze.github.io" target="_blank" class="social-link">
-              <div class="service-icon-box">
-                <img src="./assets/icons/bluesky.svg" alt="bluesky icon" width="25">
-              </div>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <a href="index.html" class="navbar-link active">About</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="resume.html" class="navbar-link">Resume</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="portfolio.html" class="navbar-link">Portfolio</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="blog.html" class="navbar-link">Blog</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="contact.html" class="navbar-link">Contact</a>
-          </li>
-
-        </ul>
-
-      </nav>
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
-        <header>
-          <h2 class="h2 article-title">About</h2>
-        </header>
-
-        <section class="about-text">
-
-          <p>
-            I am currently pursuing a Master's degree in Artificial Intelligence and Advanced Visual Computing at École Polytechnique.
-            My coursework includes studies in advanced deep learning, computer vision, reinforcement learning, and their applications in visual computing, such as 3D computer graphics, virtual and augmented reality, generative AI, autonomous driving and robotics.
-          </p>
-
-          <p>
-            Prior to this, I completed my Bachelor's degree in Mathematical and Computing Sciences for Artificial Intelligence at Bocconi University.
-            This program provided me with a rigorous foundation in mathematics and computer science, along with additional training in applied sciences such as physics, neuroscience and economics.
-          </p>
-
-          <p>
-            In my spare time I enjoy football (<i>forza Inter!</i>). I know how to act (<i>5 years of experience</i>),
-            edit cool videos (<i>I made my high-school class cry with one: real tears</i>), play the ukulele (<i>you should too</i>)
-            and I have a lot of clothes from Yes Theory (<i>I am not sponsored by them, but I should be</i>).
-          </p>
-
-          <!-- <p>
-            I have a strong analytical and problem-solving skill set, enabling me to tackle complex tasks in artificial intelligence and visual computing.
-          </p> -->
-
-        </section>
-
-
-        <!--
-          - service
-        -->
-
-        <section class="timeline">
-
-          <header>
-            <h3 class="h3 service-title">News</h3>
-          </header>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-              <p class="timeline-text">
-                <strong>May 2025</strong> - We built a news digest from personal curated sources
-                (<a style="display: inline; color:goldenrod;" href="https://www.youtube.com/watch?v=fWzd_hJSgCc" target="_blank">demo video</a>)
-                for the Tech:Europe hackathon.
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <p class="timeline-text">
-                <strong>May 2025</strong> - Guest speaker at my ex-high school to talk on AI (400+ students). The video is on YouTube at
-                <a style="display: inline; color:goldenrod;" href="https://www.youtube.com/watch?v=XFPdQTLShYk&t" target="_blank">this link</a>. 
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <p class="timeline-text">
-                <strong>March 2025</strong> - Joining Dassault Systèmes for a research internship. First job unlocked. 
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <p class="timeline-text">
-                <strong>March 2025</strong> - Just wrapped up the
-                <a style="display: inline; color:goldenrod;" href="https://www.linkedin.com/posts/pauline-commereuc_i-didnt-build-a-company-at-ai-startup-school-activity-7316014843998732289-Uonz?utm_source=share&utm_medium=member_desktop&rcm=ACoAADnoHEgBAzA0hBHosrl4RJ-_EaPpiVjcDgY" target="_blank">AI Startup School</a>
-                 organized by EF. Eye-opening!
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <p class="timeline-text">
-                <strong>Jan 2025</strong> - Just completed my first hackathon (Mistral AI Game Jam).
-                We reached the final and finished
-                <a style="display: inline; color:goldenrod;" href="https://www.linkedin.com/posts/sandro-mikautadze_my-first-hackathon-activity-7292624142510485508-8p8C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADnoHEgBAzA0hBHosrl4RJ-_EaPpiVjcDgY" target="_blank">2nd at the Community Award!</a><p>
-            </li>
-
-          
-          </ol>
-
-        </section>
-
-        <section class="service">
-
-          <header>
-            <h3 class="h3 service-title">Technical Interests</h3>
-          </header>
-        
-          <section class="about-text">
-            <p>
-              If any of these topics (or related fields) resonate with you, feel free to reach out to me! They are listed in no particular order of preference—this is simply a collection of areas I am passionate about. Please, note that the list is dynamic and constantly evolving!
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>Apr 2026</strong> - Joined Doctolib as a research intern, working on interpretability of medical vision-language models.
             </p>
-          </section>
-        
-          <ul class="service-list">
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/genai.svg" alt="genai icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">GenAI & Multimodality</h4>
-                <p class="service-item-text">
-                  How can we accurately sample from an unknown distribution to generate new images, videos, or 3D objects with AI? 
-                  What role does multimodality play in improving these capabilities?
-              </div>
-            </li>
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>Sept 2025</strong> - Published the first review of Bocconi's AI degree (BAI). It has since been
+              <a class="inline-link" href="https://medium.com/@sandromikautadze/is-bocconis-ai-degree-bai-worth-it-03809bc68ef8" target="_blank">read by 100+ students</a>.
+            </p>
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/3d.svg" alt="3d icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">3D Computer Vision</h4>
-                <p class="service-item-text">
-                  We conquered 2D. What does computer vision need to conquer the 3D world?
-                  How can it connect the dots between digital representations and the real world around us?
-              </div>
-            </li>
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>May 2025</strong> - We built a news digest from personal curated sources
+              (<a class="inline-link" href="https://www.youtube.com/watch?v=fWzd_hJSgCc" target="_blank">demo video</a>)
+              for the Tech:Europe hackathon.
+            </p>
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/audio.svg" alt="audio icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">AI for Entertainment</h4>
-                <p class="service-item-text">
-                  How can AI help creatives really focus on creativity? What can be done in the music, or cinema industries, for example? 
-              </div>
-            </li>
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>May 2025</strong> - Guest speaker at my ex-high school to talk on AI (400+ students). The video is on YouTube at
+              <a class="inline-link" href="https://www.youtube.com/watch?v=XFPdQTLShYk&t" target="_blank">this link</a>.
+            </p>
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/dynamical.svg" alt="dynamical icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Dynamical Systems</h4>
-                <p class="service-item-text">
-                  How can we study the behaviour of quantities that change over time, space or other variables?
-                  How can data-driven methods help?
-                </p>
-              </div>
-            </li>
-        
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/ai4science.svg" alt="ai4science icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">AI for Science</h4>
-                <p class="service-item-text">
-                  How can we make use of AI for scientific discovery?
-                  What architectures are needed to solve really complex physical problems?
-                </p>
-              </div>
-            </li>
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>March 2025</strong> - Joining Dassault Systèmes for a research internship. First job unlocked.
+            </p>
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/vr.svg" alt="vr icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Virtual & Augmented Reality</h4>
-                <p class="service-item-text">
-                  3D interactions are the future. How far can AI go in transforming VR and AR?
-                  Can it make 3D interactions feel seamless and bring virtual worlds closer to reality?
-                </p>
-              </div>
-            </li>
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>March 2025</strong> - Just wrapped up the
+              <a class="inline-link" href="https://www.linkedin.com/posts/pauline-commereuc_i-didnt-build-a-company-at-ai-startup-school-activity-7316014843998732289-Uonz?utm_source=share&utm_medium=member_desktop&rcm=ACoAADnoHEgBAzA0hBHosrl4RJ-_EaPpiVjcDgY" target="_blank">AI Startup School</a>
+               organized by EF. Eye-opening!
+            </p>
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/genai.svg" alt="genai icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Chip Design</h4>
-                <p class="service-item-text">
-                  How can we design new chips optimized for AI workloads?
-                  How can we use AI to help with chip design itself?
-                  And what about neuromorphic computing?
-              </div>
-            </li>
-        
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/interpretability.svg" alt="interpretability icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Interpretability & Alignment</h4>
-                <p class="service-item-text">
-                  What is really going on inside neural networks?
-                  Is there a way to understand them well enough to make them safer and more reliable?
-                </p>
-              </div>
-            </li>
-        
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/camera.svg" alt="camera icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Computational Photography</h4>
-                <p class="service-item-text">
-                  How can AI make photos look better, both when we take them and when we edit them?
-                  Could it even redefine what photography means?
-                </p>
-              </div>
-            </li>
-        
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/car.svg" alt="car icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Autonomous Driving</h4>
-                <p class="service-item-text">
-                  What will it take for AI to create fully self-driving cars?
-                  How does it handle perception and decision-making in chaotic real-world situations?
-                </p>
-              </div>
-            </li>
+          <li class="timeline-item">
+            <p class="timeline-text">
+              <strong>Jan 2025</strong> - Just completed my first hackathon (Mistral AI Game Jam).
+              We reached the final and finished
+              <a class="inline-link" href="https://www.linkedin.com/posts/sandro-mikautadze_my-first-hackathon-activity-7292624142510485508-8p8C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADnoHEgBAzA0hBHosrl4RJ-_EaPpiVjcDgY" target="_blank">2nd at the Community Award!</a>
+            </p>
+          </li>
 
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/icons/question.svg" alt="question icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Something I Don't Know Yet</h4>
-                <p class="service-item-text">
-                  
-                </p>
-              </div>
-            </li>
+        </ol>
 
-          </ul>
+      </section>
 
-        </section>
+      <section class="reveal" data-reveal hidden>
 
-      </article>
+        <h2 class="section-title">Hobbies</h2>
+
+        <div class="body-text">
+          <p>
+            Outside of work I follow football (forza Inter!), used to act (five years of it), edit videos well enough to make my
+            entire high school class cry, real tears, play the ukulele, and own more Yes Theory merchandise than any sponsorship
+            deal would justify.
+          </p>
+        </div>
+
+      </section>
 
     </div>
-
   </main>
 
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
+  <footer class="site-footer" data-site-footer hidden>
+    <div class="site-footer-inner">
 
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <div class="footer-flags">
+        <a href="https://en.wikipedia.org/wiki/Italy" target="_blank" aria-label="Italy">
+          <img src="./assets/icons/italy.svg" alt="italy icon" width="20">
+        </a>
+        <a href="https://en.wikipedia.org/wiki/Georgia_(country)" target="_blank" aria-label="Georgia">
+          <img src="./assets/icons/georgia.svg" alt="georgia icon" width="20">
+        </a>
+      </div>
+
+      <div class="footer-social">
+        <a href="mailto:sandromikautadze@yahoo.com" target="_blank" aria-label="Email">
+          <img src="./assets/icons/email.svg" alt="email icon" width="18">
+        </a>
+        <a href="https://www.linkedin.com/in/sandro-mikautadze/" target="_blank" aria-label="LinkedIn">
+          <img src="./assets/icons/linkedin.svg" alt="linkedin icon" width="18">
+        </a>
+        <a href="https://github.com/sandromikautadze" target="_blank" aria-label="GitHub">
+          <img src="./assets/icons/github.svg" alt="github icon" width="18">
+        </a>
+        <a href="https://medium.com/@sandromikautadze" target="_blank" aria-label="Medium">
+          <img src="./assets/icons/medium.svg" alt="medium icon" width="18">
+        </a>
+        <a href="https://x.com/theaitemp" target="_blank" aria-label="X">
+          <img src="./assets/icons/x.svg" alt="x icon" width="18">
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="./assets/js/script.js"></script>
 
 </body>
 

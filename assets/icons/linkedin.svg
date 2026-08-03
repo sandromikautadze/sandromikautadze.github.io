@@ -1,8 +1,8 @@
 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="paint0_linear" x1="12" y1="0" x2="12" y2="24" gradientUnits="userSpaceOnUse">
-      <stop offset="0.259336" stop-color="#FFDB6E"/>
-      <stop offset="1" stop-color="#FFBC5E"/>
+      <stop offset="0.259336" stop-color="#6c6660"/>
+      <stop offset="1" stop-color="#6c6660"/>
     </linearGradient>
   </defs>
   <g id="SVGRepo_iconCarrier">
