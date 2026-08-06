@@ -10,8 +10,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f2ec">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151311">
-  <meta name="description" content="AI Researcher working on interpretability of vision-language models."/>
+  <meta name="description" content="Technical blog post by Sandro Mikautadze.">
   <title>Sandro Mikautadze - Blog Post</title>
+
+  <link rel="canonical" href="https://sandromikautadze.github.io/post.html" data-canonical>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Sandro Mikautadze">
+  <meta property="og:title" content="Sandro Mikautadze - Blog Post" data-og-title>
+  <meta property="og:description" content="Technical blog post by Sandro Mikautadze." data-og-description>
+  <meta property="og:url" content="https://sandromikautadze.github.io/post.html" data-og-url>
+  <meta property="og:image" content="https://sandromikautadze.github.io/assets/images/profile.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@theaitemp">
+  <meta name="twitter:title" content="Sandro Mikautadze - Blog Post" data-twitter-title>
+  <meta name="twitter:description" content="Technical blog post by Sandro Mikautadze." data-twitter-description>
+  <meta name="twitter:image" content="https://sandromikautadze.github.io/assets/images/profile.png">
 
   <link rel="shortcut icon" href="./assets/icons/logo.ico" type="image/x-icon">
   <link rel="preload" href="./assets/fonts/poppins-300.woff2" as="font" type="font/woff2">
@@ -194,6 +207,40 @@
       return html.replace(/@@MATH(\d+)@@/g, (_, i) => store[Number(i)]);
     }
 
+    // The static <head> can't know a post's title/description ahead of time
+    // since content is fetched client-side; derive both from the rendered
+    // markdown (first h1 / first paragraph) and patch title, meta tags,
+    // canonical, and a BlogPosting JSON-LD block in place.
+    function updateMetaTags(slug, postTitle) {
+      const pageUrl = `https://sandromikautadze.github.io/post.html?slug=${slug}`;
+      const firstParagraph = document.querySelector('#post-content p');
+      let description = firstParagraph ? firstParagraph.textContent.trim() : 'Technical blog post by Sandro Mikautadze.';
+      if (description.length > 155) {
+        description = description.slice(0, 155).replace(/\s+\S*$/, '') + '…';
+      }
+
+      document.title = `${postTitle} - Sandro Mikautadze`;
+      document.querySelector('meta[name="description"]').setAttribute('content', description);
+      document.querySelector('[data-canonical]').setAttribute('href', pageUrl);
+      document.querySelector('[data-og-title]').setAttribute('content', postTitle);
+      document.querySelector('[data-og-description]').setAttribute('content', description);
+      document.querySelector('[data-og-url]').setAttribute('content', pageUrl);
+      document.querySelector('[data-twitter-title]').setAttribute('content', postTitle);
+      document.querySelector('[data-twitter-description]').setAttribute('content', description);
+
+      const jsonLd = document.createElement('script');
+      jsonLd.type = 'application/ld+json';
+      jsonLd.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: postTitle,
+        url: pageUrl,
+        description: description,
+        author: { '@type': 'Person', name: 'Sandro Mikautadze', url: 'https://sandromikautadze.github.io/' }
+      });
+      document.head.appendChild(jsonLd);
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       // Get the 'slug' parameter from the URL (support both query param and hash)
       const urlParams = new URLSearchParams(window.location.search);
@@ -242,12 +289,13 @@
 
           // Extract title from the first h1 if present, otherwise use slug
           const firstH1 = document.querySelector('#post-content h1');
+          const postTitle = firstH1 ? firstH1.innerText : slug.replace(/-/g, ' ');
+          document.getElementById('post-title').innerText = postTitle;
           if (firstH1) {
-            document.getElementById('post-title').innerText = firstH1.innerText;
             firstH1.remove(); // Remove the h1 from content as it's now the page title
-          } else {
-            document.getElementById('post-title').innerText = slug.replace(/-/g, ' ');
           }
+
+          updateMetaTags(slug, postTitle);
 
           // Trigger MathJax to render math in the new content. MathJax loads
           // asynchronously, so wait for its own startup promise rather than
