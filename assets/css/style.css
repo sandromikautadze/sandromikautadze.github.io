@@ -82,17 +82,32 @@
   --header-bg: hsla(42, 32%, 96%, 0.82);
 
   /**
+   * hero ambient layers (index only): the flat tokens above are opaque and
+   * would cover the canvas network rather than tint it, so these carry
+   * their own alpha
+   */
+
+  --mesh-1: hsla(174, 55%, 24%, 0.16);
+  --mesh-2: hsla(38, 55%, 52%, 0.14);
+  --mesh-3: hsla(205, 45%, 45%, 0.10);
+  --glass-bg: hsla(0, 0%, 100%, 0.38);
+  --glass-ring: hsla(0, 0%, 100%, 0.6);
+  --tile-bg: hsla(0, 0%, 100%, 0.55);
+  --tile-sheen: hsla(0, 0%, 100%, 0.70);
+  --glare: hsla(0, 0%, 100%, 0.22);
+
+  /**
    * typography
    */
 
-  --fs-1: 26px;
-  --fs-2: 20px;
-  --fs-3: 22px;
-  --fs-4: 16px;
-  --fs-5: 15px;
-  --fs-6: 14px;
-  --fs-7: 13px;
-  --fs-8: 11px;
+  --fs-1: 1.625rem;
+  --fs-2: 1.25rem;
+  --fs-3: 1.375rem;
+  --fs-4: 1rem;
+  --fs-5: 0.9375rem;
+  --fs-6: 0.875rem;
+  --fs-7: 0.8125rem;
+  --fs-8: 0.6875rem;
 
   --fw-300: 300;
   --fw-400: 400;
@@ -118,6 +133,10 @@
 
   --transition-1: 0.2s ease;
   --transition-2: 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* decelerates into rest with no overshoot — --transition-2's 1.56
+     overshoots, which suits a one-shot entrance but is wrong for a surface
+     (a tilted card, a pressed button) settling back down */
+  --ease-damped: cubic-bezier(0.22, 1, 0.36, 1);
 
 }
 
@@ -133,6 +152,18 @@
     --accent-soft: hsl(174, 30%, 16%);
     --danger: hsl(0, 55%, 62%);
     --header-bg: hsla(30, 8%, 8%, 0.82);
+
+    /* the dark accent is a much lighter, hotter teal than the light one, so
+       the same alphas as above would read very differently against a dark
+       background — each layer is retuned rather than just inherited */
+    --mesh-1: hsla(174, 45%, 48%, 0.16);
+    --mesh-2: hsla(28, 45%, 52%, 0.10);
+    --mesh-3: hsla(212, 45%, 55%, 0.12);
+    --glass-bg: hsla(30, 8%, 22%, 0.42);
+    --glass-ring: hsla(42, 15%, 92%, 0.12);
+    --tile-bg: hsla(30, 7%, 16%, 0.55);
+    --tile-sheen: hsla(0, 0%, 100%, 0.05);
+    --glare: hsla(0, 0%, 100%, 0.10);
   }
 }
 
@@ -176,7 +207,13 @@ input, textarea {
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-html { font-family: var(--ff-sans); scroll-behavior: smooth; }
+html {
+  font-family: var(--ff-sans);
+  scroll-behavior: smooth;
+  /* the default grey tap flash is only removed because every tappable
+     surface gets its own explicit :active state below (#PRESS STATES) */
+  -webkit-tap-highlight-color: transparent;
+}
 
 body {
   background: var(--bg);
@@ -191,11 +228,46 @@ body {
   }
 }
 
+/* the third accessibility signal alongside reduced-motion and
+   reduced-transparency: darken the muted text that carries most of the body
+   copy, make the translucent surfaces solid, and drop the scroll-scrub's
+   colour shift so every word sits at full contrast from the start */
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted: hsl(30, 8%, 26%);
+    --border: hsl(38, 16%, 62%);
+  }
 
+  .site-header,
+  .bento-tile,
+  .hero-avatar-wrap::before {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .word { color: var(--text); }
+}
+
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root {
+    --text-muted: hsl(35, 12%, 82%);
+    --border: hsl(30, 8%, 42%);
+  }
+}
+
+
+/* tracking is size-specific, not one flat value: this covers every heading
+   on the site except the hero name, which at 26-32px is the only genuinely
+   "display" size and gets its own, more negative value where it's defined.
+   Leading is set explicitly for the same reason — headings want it tighter
+   than the 1.6 body copy uses, and leaving it at the font's default makes
+   multi-line titles (blog posts, project cards) drift apart. */
 h1, h2, h3, h4 {
   color: var(--text);
   font-weight: var(--fw-600);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.006em;
+  line-height: 1.25;
 }
 
 p { line-height: 1.6; }
@@ -254,6 +326,47 @@ img { display: block; max-width: 100%; }
   navigation: auto;
 }
 
+/* the global reduced-motion override above uses a `*` selector, which does
+   not reach these UA-generated pseudo-elements — without this, the
+   cross-document crossfade above ignores prefers-reduced-motion entirely */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 1ms !important;
+  }
+}
+
+/**
+ * shared-element morph: blog thumbnail -> post header image. The receiving
+ * side (post.html) can carry the name statically, since a post page
+ * renders exactly one of these; the sending side (a blog card) cannot —
+ * view-transition-name must be unique per snapshot, so a list of ten cards
+ * can't share one in a stylesheet. script.js stamps it onto the single
+ * clicked thumbnail right before the navigation that captures it.
+ */
+
+.post-hero {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  view-transition-name: post-hero;
+}
+
+.post-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+::view-transition-group(post-hero) {
+  animation-duration: 0.42s;
+  animation-timing-function: var(--ease-damped);
+}
+
 
 
 
@@ -262,6 +375,31 @@ img { display: block; max-width: 100%; }
   #HEADER
 \*-----------------------------------*/
 
+/* keyboard users otherwise tab through five nav links on every page before
+   reaching content. Moved off-screen rather than display:none, which would
+   drop it out of the tab order and defeat the point; fixed rather than
+   absolute so it is reachable after the page has been scrolled. */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-500);
+  transform: translateY(-250%);
+  transition: transform var(--transition-1);
+}
+
+.skip-link:focus { transform: none; }
+
+/* the skip target takes tabindex="-1" to catch focus reliably; it should
+   not then paint a focus ring around the whole page */
+main:focus { outline: none; }
+
 .site-header {
   position: sticky;
   top: 0;
@@ -269,50 +407,75 @@ img { display: block; max-width: 100%; }
   background: var(--header-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  /* named so a cross-document view transition holds this chrome still
+     instead of dissolving it along with the rest of the old page */
+  view-transition-name: site-header;
 }
 
-/* index.html only: header/footer stay gated behind the generate-webpage
-   button, so they pop in with the rest of the page rather than just being
-   always visible like on every other page */
-[data-site-header], [data-site-footer] {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.97);
-  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+/* a hard 1px border under floating, blurred chrome reads as a ruled-off
+   box; a soft fade where content actually meets the glass reads as one
+   material with the page scrolling underneath it */
+.site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14px;
+  background: linear-gradient(to bottom, var(--border), transparent);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
-[data-site-header].is-visible, [data-site-footer].is-visible {
-  opacity: 1;
-  transform: none;
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
+
+/**
+ * tap targets: the pattern used throughout this file is padding to grow the
+ * touch box, with the parent's gap reduced by the same amount so the visual
+ * spacing is unchanged. Real padding rather than an expanded ::after,
+ * because padding is part of the layout — so when the nav wraps to a second
+ * line the rows still can't overlap each other's hit areas.
+ */
 
 .site-header-inner {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 16px 20px;
+  /* trimmed from 16px to offset the vertical padding the brand and nav
+     links now carry, so the header grows by ~6px rather than ~22px */
+  padding: 8px 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 8px 20px;
+  gap: 0 20px;
 }
 
 .brand {
+  display: inline-block;
   color: var(--text);
   font-weight: var(--fw-600);
   font-size: var(--fs-5);
   white-space: nowrap;
+  padding: 12px 0;
 }
 
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 0 4px;
 }
 
 .nav-link {
+  display: inline-block;
   color: var(--text-muted);
   font-size: var(--fs-6);
+  padding: 12px 8px;
   transition: color var(--transition-1);
 }
 
@@ -340,12 +503,14 @@ main {
 .site-footer {
   border-top: 1px solid var(--border);
   margin-top: 40px;
+  view-transition-name: site-footer;
 }
 
 .site-footer-inner {
   max-width: var(--content-width);
   margin: 0 auto;
-  padding: 24px 20px;
+  /* trimmed from 24px to offset the padding the icon anchors now carry */
+  padding: 11px 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -357,12 +522,19 @@ main {
 .footer-social {
   display: flex;
   align-items: center;
-  gap: 14px;
+  /* was 14px; the anchors below now carry 11px of their own padding, which
+     supplies the visual separation instead */
+  gap: 0;
 }
 
 .footer-flags img { width: 20px; }
 
+.footer-flags a,
 .footer-social a {
+  /* 18-20px icons are far too small to hit on a phone; padding takes the
+     anchor to ~40-42px without changing the icon's own size */
+  display: inline-flex;
+  padding: 13px;
   color: var(--text-muted);
   transition: transform var(--transition-1);
 }
@@ -391,6 +563,10 @@ main {
   margin-top: -48px;
   min-height: 100vh;
   min-height: 100svh;
+  /* full-bleed: this section sits outside .container so the ambient layers
+     below can span the viewport instead of a 720px column, so it has to
+     re-declare the container's own gutter itself */
+  padding: 0 20px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -399,31 +575,160 @@ main {
   justify-content: center;
 }
 
+/**
+ * hero depth: five layers moving at different rates so a flat page reads as
+ * one with depth. Two inputs, both written by script.js on .hero as plain
+ * numbers — --px/--py (pointer offset from the viewport centre, -1..1) and
+ * --sp (scroll progress through the hero, 0..1) — never as a transform.
+ * Each layer declares only how far it travels (--depth for the pointer,
+ * --rise for the scroll) and this shared rule composes both, so no two
+ * systems can ever fight over the property on the same element.
+ */
+
+.hero-net,
+.hero-avatar-wrap::before,
+.hero-avatar,
+.hero-text {
+  transform: translate3d(
+    calc(var(--px, 0) * var(--depth, 0) * 1px),
+    /* y travel damped to 0.6: the viewport is shorter than it is wide, so an
+       equal factor would make vertical motion feel about twice as fast */
+    calc(var(--py, 0) * var(--depth, 0) * 0.6px + var(--sp, 0) * var(--rise, 0) * 1px),
+    0
+  );
+}
+
+.hero-mesh {
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 22% 28%, var(--mesh-1), transparent 70%),
+    radial-gradient(34% 40% at 78% 22%, var(--mesh-2), transparent 70%),
+    radial-gradient(46% 46% at 55% 82%, var(--mesh-3), transparent 72%);
+  /* a 48s round trip is 0.02Hz — vestibular guidance singles out
+     oscillation near 0.2Hz, an order of magnitude above this — and the
+     travel is a few percent of the box, so it reads as light shifting
+     rather than something moving. No --depth: this is the infinitely
+     distant layer, and a keyframed transform would override the shared
+     rule above anyway. */
+  animation: mesh-drift 48s ease-in-out infinite;
+}
+
+@keyframes mesh-drift {
+  0%, 100% { transform: translate3d(-2%, -1%, 0) scale(1.06); }
+  50% { transform: translate3d(2%, 1.5%, 0) scale(1.12); }
+}
+
+.hero-net {
+  --depth: 6;
+  --rise: -40;
+  position: absolute;
+  /* bleeds past the hero on every side so the parallax/scroll travel above
+     can never drag an edge into view; .hero's own overflow crops it.
+     top/left + explicit width/height, not inset shorthand: a <canvas> is a
+     replaced element, and inset alone doesn't stretch a replaced element's
+     box the way it does a plain <div> — it falls back to the canvas's
+     default intrinsic size (300x150px) pinned at the top-left corner,
+     which is why every node used to cluster up there. */
+  top: -60px;
+  left: -60px;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  z-index: 1;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* the dark palette's accent is a much lighter teal, so the same alphas
+     read considerably hotter against the dark background */
+  .hero-net { opacity: 0.6; }
+}
+
+/* .hero's overflow crops the tinted mesh and the network dead, which left a
+   hard horizontal seam where the hero met the flat page background right
+   above the first section. This dissolves both layers into --bg over the
+   last stretch of the hero instead of slicing them. */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 180px;
+  /* over the mesh (0) and the network (1), under .hero-content (3) so the
+     CTA and scroll hint stay untouched */
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+}
+
 .hero-content {
   position: relative;
   z-index: 3;
+  max-width: var(--content-width);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* moves up a bit faster than the scroll itself and shrinks slightly as
-     you scroll through the hero (see script.js) — Bio catching up on a
-     content block that's already rising and shrinking reads as one
-     continuous motion rather than a static block that just disappears */
-  transition: transform 0.1s linear;
+  /* rises faster than the scroll and shrinks slightly, so Bio arriving
+     underneath reads as one continuous motion rather than a static block
+     that just disappears. No transition on purpose: --sp is rewritten
+     every scroll frame, so a transition here could only ever add lag the
+     pointer-driven layers above don't have. */
+  transform: translate3d(0, calc(var(--sp, 0) * -160px), 0) scale(calc(1 - var(--sp, 0) * 0.2));
+}
+
+.hero-avatar-wrap {
+  position: relative;
+  /* the frosted ::before below bleeds 22px past this box on every side, so
+     the visual gap under the disc is this margin minus that — 20px left the
+     disc overlapping the name outright. 48px reads as ~26px of real space. */
+  margin-bottom: 48px;
+}
+
+/* frosted disc: the layer that actually sells the depth, since it blurs
+   the moving network behind it while the sharp photo sits on top */
+.hero-avatar-wrap::before {
+  --depth: 12;
+  --rise: 10;
+  content: "";
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-ring);
+  box-shadow: 0 18px 40px hsla(30, 10%, 10%, 0.12);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
 }
 
 .hero-avatar {
+  --depth: 16;
+  /* the absolutely positioned ::before paints above a non-positioned inline
+     sibling by default, so without this the disc would cover the photo */
+  position: relative;
+  z-index: 1;
   width: 170px;
   height: 170px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border);
-  margin-bottom: 20px;
+}
+
+.hero-text {
+  --depth: 20;
+  --rise: -24;
 }
 
 .hero-name {
   font-size: var(--fs-1);
+  /* tightest tracking and leading on the site: both scale inversely with
+     size, and at 26-32px this is the only true display text here */
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .hero-tag {
@@ -438,107 +743,53 @@ main {
 }
 
 /**
- * generate button + status (hero), scroll hint
+ * hero CTAs: fill the wayfinding gap left by removing the old generate
+ * button. Pointer-magnetic on desktop (script.js, [data-magnet]) — see
+ * #PRESS STATES for why the press feedback here is opacity, not scale.
  */
 
-.generate-btn {
-  position: relative;
-  margin-top: 24px;
-  background: var(--accent);
-  color: var(--surface);
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-cta {
+  /* 13px vertical clears the 44px minimum touch height */
+  padding: 13px 26px;
+  border-radius: 999px;
   font-size: var(--fs-6);
   font-weight: var(--fw-500);
-  padding: 10px 22px;
-  border-radius: 999px;
-  transition: background var(--transition-1);
-  animation: breathe 2.8s ease-in-out infinite;
+  /* the magnet (script.js) writes an inline transform on pointermove; this
+     transition is what turns that per-frame write into a smooth pull
+     rather than a snap, and damps the return once the pointer leaves */
+  transition: transform 0.45s var(--ease-damped), background var(--transition-1), color var(--transition-1), border-color var(--transition-1);
 }
 
-.generate-btn:hover { background: var(--accent-strong); }
-
-@keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.045); }
+.hero-cta-primary {
+  background: var(--accent);
+  color: var(--surface);
 }
 
-.generate-status {
-  position: relative;
-  margin-top: 24px;
-  color: var(--text);
-  font-size: var(--fs-4);
-  font-weight: var(--fw-500);
-  font-style: italic;
-  filter: blur(var(--diffusion-blur, 0px));
-}
-
-.generate-status span {
-  display: inline;
-  white-space: pre-wrap;
-}
+.hero-cta-primary:hover { background: var(--accent-strong); }
 
 /**
- * generation background: neural network canvas + floating status snippets.
- * Fixed, not absolute: this makes them span the full viewport rather than
- * being boxed into the ~600px content column. They stay visually behind
- * the hero-content's own children because CSS stacking context membership
- * follows DOM ancestry, not the containing block — a `position:fixed`
- * descendant of a stacking-context-establishing ancestor (.hero-content,
- * z-index:3) is still painted within that ancestor's stack, so its own
- * z-index:-1 keeps it behind its siblings there regardless of position.
+ * scroll hint
  */
 
-.generate-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-}
-
-.generate-snippets {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.generate-snippet {
-  position: absolute;
-  color: var(--accent);
-  font-size: var(--fs-7);
-  font-family: var(--ff-mono);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  animation: snippet-drift 4s ease-in-out infinite alternate;
-}
-
-.generate-snippet.is-visible { opacity: 0.75; }
-
-@keyframes snippet-drift {
-  from { transform: translate(-50%, -50%) translate(0, 0); }
-  to { transform: translate(-50%, -50%) translate(6px, -16px); }
-}
-
 .scroll-hint {
-  margin-top: 24px;
+  margin-top: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   color: var(--text-muted);
-  opacity: 0;
-  transform: scale(0.85) translateY(-6px);
-  transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* gone by a third of the way through the hero — opacity clamps its own
+     out-of-range values, so this needs no min()/max() */
+  opacity: calc(1 - var(--sp, 0) * 3);
 }
-
-.scroll-hint.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* [hidden] and this class have equal specificity, so without this the
-   flex display above wins on source order and the element stays visible */
-.scroll-hint[hidden] { display: none; }
 
 .scroll-hint-text {
   font-size: var(--fs-7);
@@ -554,51 +805,26 @@ main {
   50% { transform: translateY(5px); }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.15; }
+@media (prefers-reduced-motion: reduce) {
+  /* the ambient layers stay on screen — hiding them would leave a visibly
+     empty 100svh box — they just stop. The canvas paints one static frame
+     (script.js) and --px/--py/--sp are never written, so every transform
+     above resolves to exactly its identity value. */
+  .hero-mesh, .scroll-hint-arrow { animation: none; }
 }
 
-
-/**
- * bio section: small avatar, plain heading and body text (already
- * "generated" via the hero button, so no per-section animation here)
- */
-
-.bio-section {
-  position: relative;
-  padding: 60px 0;
+/* one declaration covering two cases: browsers without backdrop-filter, and
+   users who asked for less transparency */
+@media (prefers-reduced-transparency: reduce) {
+  .hero-avatar-wrap::before {
+    background: var(--surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
-.bio-avatar {
-  display: block;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--border);
-  margin: 0 auto 20px;
-}
-
-
-/**
- * axis tags (Work section)
- */
-
-.research-axes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.axis-item {
-  background: var(--accent-soft);
-  color: var(--accent);
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: var(--fs-7);
-  font-weight: var(--fw-500);
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hero-avatar-wrap::before { background: var(--surface); }
 }
 
 
@@ -613,6 +839,98 @@ main {
 }
 
 .body-text p:not(:last-child) { margin-bottom: 15px; }
+
+
+
+
+/*-----------------------------------*\
+  #BENTO (Work section)
+\*-----------------------------------*/
+
+.bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* the frosted read is a translucent surface plus a hairline top highlight,
+   not backdrop-filter: these tiles sit on a flat --bg, so a blur has
+   nothing behind it to resolve and would only cost a compositor layer */
+.bento-tile {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--tile-bg);
+  box-shadow: var(--shadow-1), inset 0 1px 0 var(--tile-sheen);
+  transition: transform 180ms var(--ease-damped), box-shadow 180ms var(--ease-damped);
+}
+
+.bento-label {
+  color: var(--accent);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-500);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.bento-title {
+  font-size: var(--fs-4);
+  margin-bottom: 8px;
+}
+
+.bento-text {
+  color: var(--text-muted);
+  font-weight: var(--fw-400);
+  line-height: 1.6;
+}
+
+.bento-note { margin-top: 18px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .bento-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-1), var(--shadow-2), inset 0 1px 0 var(--tile-sheen);
+  }
+}
+
+@media (min-width: 640px) {
+  .bento { grid-template-columns: 1fr 1fr; }
+}
+
+/* the tiles are translucent, so they belong in the same opt-out as the
+   header and the hero's frosted disc */
+@media (prefers-reduced-transparency: reduce) {
+  .bento-tile { background: var(--surface); }
+}
+
+
+/**
+ * scroll-scrubbed word reveal
+ */
+
+/* deliberately a plain inline span, not inline-block: inline-block would
+   make each word an atomic box, which changes line breaking and is what
+   makes some screen readers chunk a sentence word by word.
+
+   The reveal shifts colour rather than dimming opacity. Dimming was the
+   obvious approach and it was wrong: --text-muted only has ~5.4:1 on --bg,
+   so any opacity low enough to read as an effect drops the unlit words
+   under the 4.5:1 minimum (0.22 measured at 1.34:1), and the floor needed
+   to stay compliant is ~0.92, where the effect is invisible. Going
+   muted -> full text colour instead gives a stronger visible shift with
+   both states comfortably legible. */
+.word {
+  transition: color 0.45s ease;
+}
+
+.word.is-lit { color: var(--text); }
+
+/* a scrubbed word inside a link must keep the link colour, or lighting it
+   would repaint the link as body text */
+.inline-link .word.is-lit { color: var(--accent); }
+
+@media print { .word { color: var(--text); } }
 
 
 
@@ -736,13 +1054,18 @@ main {
 .filter-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
-  margin-bottom: 28px;
+  gap: 0 4px;
+  /* trimmed to offset the buttons' own vertical padding */
+  margin-bottom: 16px;
+  /* keeps the row's left edge aligned with the body text despite the
+     buttons' horizontal padding */
+  margin-left: -8px;
 }
 
 .filter-item button {
   color: var(--text-muted);
   font-size: var(--fs-5);
+  padding: 11px 8px;
   transition: var(--transition-1);
 }
 
@@ -943,17 +1266,60 @@ main {
   font-size: var(--fs-6);
 }
 
-.blog-meta .dot {
-  background: var(--text-muted);
-  width: 4px;
-  height: 4px;
-  border-radius: 4px;
-}
-
 .blog-item-title {
   color: var(--text);
   font-size: var(--fs-4);
   font-weight: var(--fw-500);
+}
+
+
+
+
+/*-----------------------------------*\
+  #CARD TILT
+\*-----------------------------------*/
+
+/* cursor-only, gated in CSS as well as JS (script.js uses the identical
+   query): gating only the JS would still leave a zero-opacity glare
+   pseudo-element in the box tree on every card, which mobile Safari's
+   sticky-hover can reveal on tap. With both gated, touch stays byte-
+   identical to today. */
+@media (hover: hover) and (pointer: fine) {
+
+  /* re-specifies the shorthand already on this rule (line ~966) — has to
+     be repeated here or the box-shadow hover stops transitioning */
+  .blog-post-item > a {
+    position: relative;
+    transition: box-shadow var(--transition-1), transform 0.35s var(--ease-damped);
+  }
+
+  .project-item > a {
+    display: block;
+    transition: transform 0.35s var(--ease-damped);
+  }
+
+  /* transition stays on at all times, not just on leave: pointermove
+     restarts it every frame with a target only a degree or two away, so it
+     acts as a low-pass filter that smooths tracking and gives the settle on
+     leave, with no class-toggling or spring integrator needed */
+  .project-img::after,
+  .blog-post-item > a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-1);
+    background: radial-gradient(
+      circle at var(--glare-x, 50%) var(--glare-y, 50%),
+      var(--glare), transparent 45%
+    );
+  }
+
+  .project-item > a:hover .project-img::after,
+  .blog-post-item > a:hover::after { opacity: 1; }
+
 }
 
 
@@ -983,12 +1349,72 @@ main {
   flex-shrink: 0;
 }
 
+/* the row is already ~54px tall, but the anchor inside it was only ~22px,
+   so a tap a few pixels above or below the text hit nothing. The negative
+   margin keeps the row's height exactly where it was. */
 .contact-plain-row a {
+  display: inline-block;
   font-size: var(--fs-6);
   overflow-wrap: anywhere;
+  padding: 11px 0;
+  margin: -11px 0;
 }
 
 
+
+
+/*-----------------------------------*\
+  #PRESS STATES
+\*-----------------------------------*/
+
+/**
+ * feedback on pointer-down, everywhere. :hover never resolves on a touch
+ * device, so without this every tap on this site is silent until the next
+ * page paints. The dim/scale below is intentionally untransitioned on the
+ * way down (instant) — a press has to land on the same frame as the finger
+ * or it reads as lag, not weight — and eases back out over --transition-1.
+ */
+
+.brand:active,
+.nav-link:active,
+.filter-item button:active,
+.inline-link:active,
+.back-btn:active,
+.contact-plain-row a:active {
+  opacity: 0.5;
+  transition: none;
+}
+
+/* opacity, not scale: the magnet (script.js) already owns this element's
+   transform on every pointermove, and an inline style beats any rule from
+   a stylesheet regardless of specificity — a :active transform here would
+   just be silently discarded while the pointer is nearby */
+.hero-cta:active { opacity: 0.7; }
+
+/* pressed on the image, not the containing <a>: later phases give that
+   anchor its own JS-driven tilt transform, and inline style would beat a
+   plain CSS rule on the same element */
+.project-img,
+.blog-banner-box {
+  transition: transform 180ms var(--ease-damped);
+}
+
+.project-item > a:active .project-img,
+.blog-post-item > a:active .blog-banner-box {
+  transform: scale(0.96);
+  transition-duration: 60ms;
+}
+
+/* placed after .footer-social a:hover (identical specificity) so source
+   order — not the cascade — decides in its favour while pressed */
+.footer-social a:active {
+  transform: translateY(-2px) scale(0.88);
+}
+
+.bento-tile:active {
+  transform: scale(0.98);
+  transition-duration: 60ms;
+}
 
 
 
@@ -999,10 +1425,10 @@ main {
 @media (min-width: 640px) {
 
   :root {
-    --fs-1: 32px;
-    --fs-2: 22px;
-    --fs-3: 24px;
-    --fs-6: 15px;
+    --fs-1: 2rem;
+    --fs-2: 1.375rem;
+    --fs-3: 1.5rem;
+    --fs-6: 0.9375rem;
   }
 
   main { padding: 64px 0 60px; }
@@ -1012,11 +1438,6 @@ main {
   .hero-avatar {
     width: 190px;
     height: 190px;
-  }
-
-  .bio-avatar {
-    width: 160px;
-    height: 160px;
   }
 
   .reveal { margin-bottom: 52px; }

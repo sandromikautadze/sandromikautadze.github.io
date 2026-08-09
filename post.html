@@ -4,6 +4,7 @@
 <head>
 
   <script defer data-domain="sandromikautadze.github.io" src="https://plausible.io/js/script.js"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="20c87f73-437a-40aa-bde6-eb3140918333"></script>
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,7 +61,7 @@
       margin-bottom: 10px;
       font-weight: var(--fw-600);
     }
-    .blog-content-rendered h1 { font-size: var(--fs-1); }
+    .blog-content-rendered h1 { font-size: var(--fs-1); letter-spacing: -0.02em; }
     .blog-content-rendered h2 { font-size: var(--fs-2); }
     .blog-content-rendered h3 { font-size: var(--fs-4); }
 
@@ -108,15 +109,29 @@
 
     .back-btn {
       color: var(--accent);
-      margin-bottom: 20px;
+      /* padding for a 44px touch target, negative margin so the link still
+         lines up with the body text and keeps its original spacing */
+      padding: 12px 8px;
+      margin: 0 0 8px -8px;
       display: inline-block;
       cursor: pointer;
       font-size: var(--fs-6);
     }
+
+    /* the loading spinner carried this class but nothing ever defined it, so
+       it sat frozen while the markdown fetched */
+    .spin {
+      display: inline-block;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 
 <body>
+
+  <a href="#main" class="skip-link">Skip to content</a>
 
   <header class="site-header">
     <div class="site-header-inner">
@@ -131,12 +146,36 @@
     </div>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
     <div class="container blog-posts">
 
       <a href="blog.html" class="back-btn">← Back</a>
 
-      <h1 id="post-title" style="margin-top: 10px; margin-bottom: 20px; color: var(--text); font-size: var(--fs-1); font-weight: var(--fw-600);">Loading...</h1>
+      <figure class="post-hero" id="post-hero" hidden>
+        <img id="post-hero-img" alt="">
+      </figure>
+
+      <script>
+        // built during parse, not on DOMContentLoaded: the incoming half of
+        // a cross-document view transition is snapshotted at the new
+        // document's first render opportunity, and an image inserted after
+        // that point is simply not in the frame the browser morphs into.
+        // The src is the same file the blog list just painted, so it's a
+        // cache hit rather than a fresh fetch.
+        (function () {
+          var POST_HERO_IMAGES = {
+            "latex-test": "./assets/images/latex-test.svg"
+          };
+          var params = new URLSearchParams(location.search);
+          var slug = params.get("slug") || location.hash.slice(1);
+          var src = POST_HERO_IMAGES[slug];
+          if (!src) return;
+          document.getElementById("post-hero-img").src = src;
+          document.getElementById("post-hero").hidden = false;
+        })();
+      </script>
+
+      <h1 id="post-title" style="margin-top: 10px; margin-bottom: 20px; color: var(--text); font-size: var(--fs-1); font-weight: var(--fw-600); letter-spacing: -0.02em;">Loading...</h1>
 
       <div id="post-content" class="blog-content-rendered">
         <!-- Markdown content will be injected here -->
