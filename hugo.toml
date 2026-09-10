@@ -5,8 +5,8 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
 [params]
-  description = "Sandro Mikautadze is an AI researcher working on mechanistic interpretability of medical vision-language models."
-  email = "sandro.mikautadze@polytechnique.edu"
+  description = "Sandro Mikautadze is an AI researcher interested in multimodality and mechanistic interpretability."
+  email = "sandromikautadze@yahoo.com"
   github = "https://github.com/sandromikautadze"
   linkedin = "https://www.linkedin.com/in/sandro-mikautadze/"
   medium = "https://medium.com/@sandromikautadze"

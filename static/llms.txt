@@ -1,12 +1,12 @@
 # Sandro Mikautadze
 
-> AI researcher working on the mechanistic interpretability of medical vision-language models. Research intern at Doctolib (Paris). MSc in AI and Advanced Visual Computing, École Polytechnique; BSc in Mathematical and Computing Sciences for AI, Bocconi.
+> AI researcher interested in multimodality and mechanistic interpretability. MSc in AI and Advanced Visual Computing, École Polytechnique; BSc in Mathematical and Computing Sciences for AI, Bocconi.
 
 ## Pages
 
 - [About](https://sandromikautadze.github.io/): bio, news
-- [Research](https://sandromikautadze.github.io/research/): research statement, publications, projects
-- [Blog](https://sandromikautadze.github.io/blog/): technical posts on vision-language models and interpretability
+- [Things](https://sandromikautadze.github.io/research/): publications, hackathons, university projects
+- [Blog](https://sandromikautadze.github.io/blog/): technical posts, plus essays on Medium
 - [CV](https://sandromikautadze.github.io/cv/): education and experience
 - [RSS feed](https://sandromikautadze.github.io/blog/index.xml)
 - [Sitemap](https://sandromikautadze.github.io/sitemap.xml)
@@ -16,4 +16,5 @@
 - Email: sandro.mikautadze@polytechnique.edu
 - GitHub: https://github.com/sandromikautadze
 - LinkedIn: https://www.linkedin.com/in/sandro-mikautadze/
+- X: https://x.com/theaitemp
 - Medium: https://medium.com/@sandromikautadze

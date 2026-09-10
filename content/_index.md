@@ -2,8 +2,10 @@
 title: Sandro Mikautadze
 aliases: [/contact.html]
 ---
-Research intern at Doctolib, Paris, working on the interpretability of medical vision-language models. MSc in AI and Advanced Visual Computing at École Polytechnique, BSc in Mathematics and Computing for AI at Bocconi. Italian and Georgian.
+I'm a research intern at Doctolib, Paris, working on vision-language models. I started studying AI in 2019 at Bocconi University in Italy and UW-Madison in the US; later at École Polytechnique in France.
 
-<span class="mono label-inline">Now</span> Finishing my MSc and applying to PhD positions starting 2027 in interpretability of vision and multimodal models. Glad to hear from labs working on this.
+My main research interests include **multimodality** and **mechanistic interpretability**.
 
-Outside research I play football and follow Inter, edit video, play the ukulele, and miss being on stage.
+Outside professional stuff, I play football and enjoy sports, support Inter, edit videos, play the ukulele very badly, miss being an actor, and sometimes *seek discomfort*. 
+
+<span class="mono label-inline">Now</span> Finishing my MSc and looking for research-oriented positions, whether in industry or PhD. DMs open.

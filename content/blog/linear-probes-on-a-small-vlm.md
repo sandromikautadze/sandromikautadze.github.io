@@ -1,5 +1,5 @@
 ---
-title: What a Linear Probe Actually Measures
+title: What a Linear Probe Actually Measures (temp)
 description: A worked example of probing a small vision-language model, with the maths spelled out and the two ways the result can fool you.
 date: 2026-09-08
 tags: [interpretability, vlm]
