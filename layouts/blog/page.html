@@ -1,10 +1,10 @@
 {{ define "mainclass" }}post{{ end }}
 {{ define "main" }}
-<aside class="toc">
+<details class="toc" open>
+  <summary class="label">Contents</summary>
   <div class="progress" aria-hidden="true"><i></i></div>
-  <p class="label">Contents</p>
   {{ .TableOfContents }}
-</aside>
+</details>
 <article class="prose">
   <header class="post-head">
     <h1 class="display">{{ .Title }}</h1>
@@ -28,7 +28,8 @@
   </footer>
 </article>
 <script>
-// ponytail: highlight current TOC entry; the only JS on the site
+// ponytail: highlight current TOC entry and fill the reading-progress rail
+if(matchMedia('(max-width: 1099px)').matches)document.querySelector('.toc').removeAttribute('open');
 const links=[...document.querySelectorAll('.toc a')];
 const byId=Object.fromEntries(links.map(a=>[a.hash.slice(1),a]));
 const io=new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting){links.forEach(a=>a.removeAttribute('aria-current'));byId[e.target.id]?.setAttribute('aria-current','true');}}},{rootMargin:'0px 0px -70% 0px'});

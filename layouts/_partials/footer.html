@@ -1,14 +1,8 @@
 <footer class="site-footer mono">
   <div class="foot-row">
-    <span>
-      <a href="mailto:{{ .Site.Params.email }}">Email</a> ·
-      <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">LinkedIn</a> ·
-      <a href="{{ .Site.Params.x }}" target="_blank" rel="noopener">X</a> ·
-      <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="{{ .Site.Params.medium }}" target="_blank" rel="noopener">Medium</a> ·
-      <a href="/blog/index.xml">RSS</a>
+    <span class="social">
+      {{ partial "social.html" . }}
     </span>
-    <span>Updated {{ now.Format "Jan 2006" }}</span>
   </div>
   <p class="legal">© {{ now.Year }} Sandro Mikautadze. Views are my own and do not represent my employer.</p>
 </footer>

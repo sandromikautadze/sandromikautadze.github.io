@@ -16,7 +16,7 @@ Open http://localhost:1313. Drafts and future-dated posts are hidden unless you 
 
 - `content/_index.md`: intro text on the home page
 - `data/home.yaml`: news items (the first four show, the rest sit behind "See all")
-- `data/research.yaml`: publications, hackathons, university projects (`flag: Thesis` adds the badge)
+- `data/things.yaml`: publications, hackathons, university projects (`flag: Thesis` adds the badge)
 - `data/cv.yaml`: education and experience
 - `data/medium.yaml`: Medium articles listed on the blog page
 - `content/blog/<slug>.md`: a post. Frontmatter: `title`, `description`, `date`, `tags`, `math: true` when the post has LaTeX

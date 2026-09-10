@@ -1,16 +1,16 @@
 education:
   - where: École Polytechnique
     city: Paris
-    when: 2024 – present
+    when: 2024 – 2026
     what: MSc in Artificial Intelligence and Advanced Visual Computing
-  - where: Bocconi University
-    city: Milan
-    when: 2021 – 2024
-    what: BSc in Mathematical and Computing Sciences for Artificial Intelligence
   - where: University of Wisconsin–Madison
     city: Madison
     when: Fall 2023
     what: Exchange semester
+  - where: Bocconi University
+    city: Milan
+    when: 2021 – 2024
+    what: BSc in Mathematical and Computing Sciences for Artificial Intelligence
 experience:
   - where: Doctolib
     city: Paris

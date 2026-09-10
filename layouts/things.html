@@ -3,7 +3,7 @@
   <h1 class="display">{{ .Title }}</h1>
   {{ .Content }}
 </article>
-{{ $r := hugo.Data.research }}
+{{ $r := hugo.Data.things }}
 <section>
   <h2 class="label">Publications</h2>
   {{ partial "work-list.html" $r.publications }}

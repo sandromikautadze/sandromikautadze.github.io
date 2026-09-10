@@ -2,26 +2,24 @@
 {{ $d := hugo.Data.home }}
 <section class="identity">
   <div class="side">
-    <span class="portrait"><img src="/images/profile.jpg" alt="Portrait of Sandro Mikautadze" width="667" height="1000"></span>
+    <div class="pics">
+      <div class="track">
+        {{ range slice
+          (dict "src" "images/profile.jpg" "alt" "Portrait of Sandro Mikautadze" "cap" "Me drinking" "pos" "")
+          (dict "src" "images/extra-1.jpg" "alt" "Sandro in a hammock" "cap" "Me sleeping" "pos" "50% 62%")
+          (dict "src" "images/img_9490.jpg" "alt" "Sandro, years ago" "cap" "Me younger" "pos" "") }}
+        {{ $img := (resources.Get .src).Resize "x480 q85" }}
+        <img src="{{ $img.RelPermalink }}" alt="{{ .alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" data-caption="{{ .cap }}"{{ with .pos }} style="object-position: {{ . }}"{{ end }}>
+        {{ end }}
+      </div>
+      <button class="next" type="button" aria-label="Next photo">&rarr;</button>
+    </div>
+    <p class="mono cap" aria-live="polite">Me drinking</p>
     <p class="flags"><img src="/icons/italy.svg" alt="Italy" width="16" height="16"><img src="/icons/georgia.svg" alt="Georgia" width="16" height="16"></p>
-    <p class="social">
-      <a href="mailto:{{ .Site.Params.email }}" aria-label="Email"><img src="/icons/email.svg" alt="" width="22" height="22"></a>
-      <a href="{{ .Site.Params.linkedin }}" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="/icons/linkedin.svg" alt="" width="22" height="22"></a>
-      <a href="{{ .Site.Params.x }}" aria-label="X" target="_blank" rel="noopener"><img src="/icons/x.svg" alt="" width="22" height="22"></a>
-      <a href="{{ .Site.Params.github }}" aria-label="GitHub" target="_blank" rel="noopener"><img src="/icons/github.svg" alt="" width="22" height="22"></a>
-      <a href="{{ .Site.Params.medium }}" aria-label="Medium" target="_blank" rel="noopener"><img src="/icons/medium.svg" alt="" width="22" height="22"></a>
-    </p>
+    <p class="social">{{ partial "social.html" . }}</p>
   </div>
   <h1 class="display">Sandro Mikautadze</h1>
   {{ .Content }}
-</section>
-
-<section class="gallery">
-  <div class="pair">
-    <img src="/images/extra-1.jpg" alt="Sandro in a hammock" width="932" height="1400" loading="lazy" style="object-position: 50% 62%">
-    <img src="/images/img_9490.jpg" alt="Sandro, even more years ago" width="1400" height="1128" loading="lazy">
-  </div>
-  <p class="mono caption">Some random older pics of mine so the website is not all business</p>
 </section>
 
 <section>
@@ -39,4 +37,27 @@
   </details>
   {{ end }}
 </section>
+<script>
+(() => {
+  const track = document.querySelector(".track"), cap = document.querySelector(".cap");
+  const imgs = [...track.children], n = imgs.length;
+  track.appendChild(imgs[0].cloneNode(true));
+  let i = 0;
+  const snapToStart = () => {
+    if (i < n) return;
+    track.style.transition = "none";
+    i = 0; track.style.transform = "none";
+    track.offsetHeight;
+    track.style.transition = "";
+  };
+  document.querySelector(".next").addEventListener("click", () => {
+    if (i >= n) return;
+    i++;
+    track.style.transform = `translateX(-${i * 100 / (n + 1)}%)`;
+    cap.textContent = imgs[i % n].dataset.caption;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) snapToStart();
+  });
+  track.addEventListener("transitionend", snapToStart);
+})();
+</script>
 {{ end }}
