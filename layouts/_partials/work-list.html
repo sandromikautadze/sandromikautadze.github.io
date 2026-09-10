@@ -1,0 +1,9 @@
+{{- /* compact rows, same shape as the blog index: year | title · meta · links */ -}}
+<ul class="rows">
+{{ range . }}{{ $w := . }}
+  <li>
+    <span class="mono date">{{ .year }}</span>
+    <span>{{ with .links }}<a href="{{ (index . 0).url }}" target="_blank" rel="noopener">{{ $w.title }}</a>{{ else }}{{ .title }}{{ end }}{{ with .flag }} <span class="mono flag">{{ . }}</span>{{ end }}{{ with .meta }} <span class="mono meta inline">{{ . }}</span>{{ end }}{{ with .links }} {{ range . }}<a class="mono tag" href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a>{{ end }}{{ end }}</span>
+  </li>
+{{ end }}
+</ul>

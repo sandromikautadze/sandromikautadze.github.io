@@ -1,0 +1,42 @@
+{{ define "main" }}
+{{ $d := hugo.Data.home }}
+<section class="identity">
+  <div class="side">
+    <span class="portrait"><img src="/images/profile.jpg" alt="Portrait of Sandro Mikautadze" width="667" height="1000"></span>
+    <p class="flags"><img src="/icons/italy.svg" alt="Italy" width="16" height="16"><img src="/icons/georgia.svg" alt="Georgia" width="16" height="16"></p>
+    <p class="social">
+      <a href="mailto:{{ .Site.Params.email }}" aria-label="Email"><img src="/icons/email.svg" alt="" width="22" height="22"></a>
+      <a href="{{ .Site.Params.linkedin }}" aria-label="LinkedIn" target="_blank" rel="noopener"><img src="/icons/linkedin.svg" alt="" width="22" height="22"></a>
+      <a href="{{ .Site.Params.x }}" aria-label="X" target="_blank" rel="noopener"><img src="/icons/x.svg" alt="" width="22" height="22"></a>
+      <a href="{{ .Site.Params.github }}" aria-label="GitHub" target="_blank" rel="noopener"><img src="/icons/github.svg" alt="" width="22" height="22"></a>
+      <a href="{{ .Site.Params.medium }}" aria-label="Medium" target="_blank" rel="noopener"><img src="/icons/medium.svg" alt="" width="22" height="22"></a>
+    </p>
+  </div>
+  <h1 class="display">Sandro Mikautadze</h1>
+  {{ .Content }}
+</section>
+
+<section class="gallery">
+  <div class="pair">
+    <img src="/images/extra-1.jpg" alt="Sandro in a hammock" width="932" height="1400" loading="lazy" style="object-position: 50% 62%">
+    <img src="/images/img_9490.jpg" alt="Sandro, even more years ago" width="1400" height="1128" loading="lazy">
+  </div>
+  <p class="mono caption">Some random older pics of mine so the website is not all business</p>
+</section>
+
+<section>
+  <h2 class="label">News</h2>
+  {{ $show := 4 }}{{ $news := sort $d.news "date" "desc" }}
+  <ul class="news">
+  {{ range first $show $news }}{{ partial "news-item.html" . }}{{ end }}
+  </ul>
+  {{ if gt (len $news) $show }}
+  <details class="more">
+    <summary class="mono btn"><span class="more-open">See all</span><span class="more-close">See less</span></summary>
+    <ul class="news">
+    {{ range after $show $news }}{{ partial "news-item.html" . }}{{ end }}
+    </ul>
+  </details>
+  {{ end }}
+</section>
+{{ end }}

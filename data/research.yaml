@@ -1,0 +1,80 @@
+publications:
+- title: '[Paper title]'
+  year: '2026'
+  meta: '[Venue] · with [coauthors]'
+  links:
+  - label: arXiv
+    url: '#'
+  - label: Code
+    url: '#'
+hackathons:
+- title: My Journalist
+  year: '2025'
+  meta: Tech:Europe hackathon
+  links:
+  - label: Code
+    url: https://github.com/alessandropranzo/ai_news_digest
+  - label: Demo
+    url: https://www.youtube.com/watch?v=fWzd_hJSgCc
+- title: Think in Sync
+  year: '2025'
+  meta: Mistral AI Game Jam · finalist, 2nd at the Community Award
+  links:
+  - label: Play
+    url: https://www.think-in-sync.com/
+projects:
+- title: Storyboard Generator
+  year: '2025'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/storyboard-diffusion
+- title: Sub-Event Tweet Detection
+  year: '2024'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/sub-event-detection
+- title: Football Pitch Mapping and Player Detection
+  year: '2024'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/mikautadze-samaha-project
+- title: 'Discovering Equations in a Data-Driven Era: An Analysis of the SINDy Algorithm'
+  year: '2024'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/sindy-thesis
+  flag: Thesis
+- title: Image Colorization
+  year: '2024'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/image-colorization
+- title: Modeling Neuron Encoding of Visual Inputs in the Brain
+  year: '2024'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/neural-response-identification
+- title: Hypoxia Prediction of Breast-Cancer Cells
+  year: '2023'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/hypoxia-prediction-cancer
+- title: Investigation on Air Quality
+  year: '2022'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/air-pollution
+- title: Spam Filter Using Naive Bayes
+  year: '2022'
+  meta: ''
+  links:
+  - label: Code
+    url: https://github.com/sandromikautadze/spam-filter

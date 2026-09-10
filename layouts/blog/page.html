@@ -1,0 +1,40 @@
+{{ define "mainclass" }}post{{ end }}
+{{ define "main" }}
+<aside class="toc">
+  <div class="progress" aria-hidden="true"><i></i></div>
+  <p class="label">Contents</p>
+  {{ .TableOfContents }}
+</aside>
+<article class="prose">
+  <header class="post-head">
+    <h1 class="display">{{ .Title }}</h1>
+    <p class="mono meta">{{ .Date.Format "2006-01-02" }} · {{ .ReadingTime }} min{{ with .Params.tags }} · {{ delimit . ", " }}{{ end }}</p>
+  </header>
+  {{ .Content }}
+  <footer class="post-foot">
+    <details class="cite">
+      <summary class="mono">Cite this post</summary>
+<pre><code>@misc{mikautadze{{ .Date.Format "2006" }}{{ .File.ContentBaseName | replaceRE "[^a-z]" "" }},
+  author = {Mikautadze, Sandro},
+  title  = { {{- .Title -}} },
+  year   = { {{- .Date.Format "2006" -}} },
+  url    = { {{- .Permalink -}} }
+}</code></pre>
+    </details>
+    <nav class="pager mono">
+      {{ with .NextInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+      {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+    </nav>
+  </footer>
+</article>
+<script>
+// ponytail: highlight current TOC entry; the only JS on the site
+const links=[...document.querySelectorAll('.toc a')];
+const byId=Object.fromEntries(links.map(a=>[a.hash.slice(1),a]));
+const io=new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting){links.forEach(a=>a.removeAttribute('aria-current'));byId[e.target.id]?.setAttribute('aria-current','true');}}},{rootMargin:'0px 0px -70% 0px'});
+Object.keys(byId).forEach(id=>{const h=document.getElementById(id);if(h)io.observe(h)});
+const bar=document.querySelector('.progress i');
+const prog=()=>{const d=document.documentElement;bar.style.height=(100*d.scrollTop/(d.scrollHeight-d.clientHeight)).toFixed(1)+'%'};
+addEventListener('scroll',prog,{passive:true});prog();
+</script>
+{{ end }}

@@ -1,0 +1,8 @@
+{{ if .Store.Get "plotly" }}
+<script>
+// ponytail: theme every Plotly figure from the site's CSS tokens, render, and follow customdata URLs on click
+const css=getComputedStyle(document.documentElement),tok=n=>css.getPropertyValue(n).trim();
+const theme={paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{family:tok('--mono'),size:12,color:tok('--muted')},colorway:[tok('--accent'),tok('--ink'),'#8aa0c8','#c8b46b'],margin:{l:48,r:16,t:16,b:44},xaxis:{gridcolor:tok('--rule'),zerolinecolor:tok('--rule')},yaxis:{gridcolor:tok('--rule'),zerolinecolor:tok('--rule')},legend:{orientation:'h',y:1.12},hoverlabel:{font:{family:tok('--mono')}}};
+document.querySelectorAll('.plot[data-src]').forEach(async el=>{const fig=await (await fetch(el.dataset.src)).json();const lay=Object.assign({},theme,fig.layout||{},{paper_bgcolor:theme.paper_bgcolor,plot_bgcolor:theme.plot_bgcolor,font:theme.font});lay.xaxis=Object.assign({},theme.xaxis,fig.layout?.xaxis||{});lay.yaxis=Object.assign({},theme.yaxis,fig.layout?.yaxis||{});await Plotly.newPlot(el,fig.data,lay,{displayModeBar:false,responsive:true});el.on('plotly_click',e=>{const u=e.points[0]?.customdata;if(u)location.href=u});});
+</script>
+{{ end }}

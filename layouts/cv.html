@@ -1,0 +1,19 @@
+{{ define "main" }}
+<h1 class="display">CV (short)</h1>
+<section>
+  <h2 class="label">Education</h2>
+  <ul class="cv">
+  {{ range hugo.Data.cv.education }}
+    <li><span class="mono date">{{ .when }}</span><span><strong>{{ .where }}</strong><span class="mono meta inline">{{ .city }}</span><br>{{ .what }}</span></li>
+  {{ end }}
+  </ul>
+</section>
+<section>
+  <h2 class="label">Experience</h2>
+  <ul class="cv">
+  {{ range hugo.Data.cv.experience }}
+    <li><span class="mono date">{{ .when }}</span><span><strong>{{ .where }}</strong><span class="mono meta inline">{{ .city }}</span><br>{{ .role }}. <span class="muted">{{ .what }}</span></span></li>
+  {{ end }}
+  </ul>
+</section>
+{{ end }}

@@ -1,0 +1,18 @@
+{{ define "main" }}
+<article class="prose">
+  <h1 class="display">{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{ $r := hugo.Data.research }}
+<section>
+  <h2 class="label">Publications</h2>
+  {{ partial "work-list.html" $r.publications }}
+</section>
+<section>
+  <h2 class="label">Additional work</h2>
+  <h3 class="sub">Hackathons</h3>
+  {{ partial "work-list.html" $r.hackathons }}
+  <h3 class="sub">University projects</h3>
+  {{ partial "work-list.html" $r.projects }}
+</section>
+{{ end }}

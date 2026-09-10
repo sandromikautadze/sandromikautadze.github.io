@@ -1,0 +1,32 @@
+news:
+- date: 2026-04
+  text: Joined Doctolib as a research intern, working on vision-language models.
+- date: 2025-09
+  text: Published the first review of Bocconi's AI degree (BAI). It has since been
+    read by thousands of students.
+  link:
+    label: Article
+    url: https://medium.com/@sandromikautadze/is-bocconis-ai-degree-bai-worth-it-03809bc68ef8
+- date: 2025-05
+  text: We built a news digest from personal curated sources for the Tech:Europe hackathon.
+  link:
+    label: Demo video
+    url: https://www.youtube.com/watch?v=fWzd_hJSgCc
+- date: 2025-05
+  text: Guest speaker at my ex-high school to talk on AI (400+ students).
+  link:
+    label: Video
+    url: https://www.youtube.com/watch?v=XFPdQTLShYk
+- date: 2025-03
+  text: Joining Dassault Systèmes for a research internship. First job unlocked.
+- date: 2025-03
+  text: Just wrapped up the AI Startup School organized by EF. Eye-opening!
+  link:
+    label: Post
+    url: https://www.linkedin.com/posts/pauline-commereuc_i-didnt-build-a-company-at-ai-startup-school-activity-7316014843998732289-Uonz
+- date: 2025-01
+  text: Just completed my first hackathon (Mistral AI Game Jam). We reached the final
+    and finished 2nd at the Community Award!
+  link:
+    label: Post
+    url: https://www.linkedin.com/posts/sandro-mikautadze_my-first-hackathon-activity-7292624142510485508-8p8C

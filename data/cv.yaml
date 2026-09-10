@@ -1,0 +1,29 @@
+education:
+  - where: École Polytechnique
+    city: Paris
+    when: 2024 – present
+    what: MSc in Artificial Intelligence and Advanced Visual Computing
+  - where: Bocconi University
+    city: Milan
+    when: 2021 – 2024
+    what: BSc in Mathematical and Computing Sciences for Artificial Intelligence
+  - where: University of Wisconsin–Madison
+    city: Madison
+    when: Fall 2023
+    what: Exchange semester
+experience:
+  - where: Doctolib
+    city: Paris
+    when: Apr 2026 – present
+    role: Research Scientist Intern
+    what: Vision-language models and interpretability.
+  - where: DXOMARK
+    city: Paris
+    when: Oct 2025 – Mar 2026
+    role: AI Researcher, university transverse project
+    what: Feature matching and evaluations for camera evaluation protocols.
+  - where: Dassault Systèmes
+    city: Paris
+    when: Mar 2025 – Aug 2025
+    role: Research Engineer Intern
+    what: 3D deep learning.
