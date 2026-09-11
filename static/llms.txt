@@ -5,6 +5,7 @@
 ## Pages
 
 - [About](https://sandromikautadze.github.io/): bio, news
+- [News](https://sandromikautadze.github.io/news/): recent updates
 - [Things](https://sandromikautadze.github.io/things/): publications, hackathons, university projects
 - [Blog](https://sandromikautadze.github.io/blog/): technical posts, plus essays on Medium
 - [CV](https://sandromikautadze.github.io/cv/): education and experience

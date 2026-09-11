@@ -49,6 +49,8 @@ projects:
   links:
   - label: Code
     url: https://github.com/sandromikautadze/image-colorization
+  - label: Web app
+    url: https://imagecolorizationwithdeeplearning.streamlit.app/
 - title: Modeling Neuron Encoding of Visual Inputs in the Brain
   year: '2024'
   links:

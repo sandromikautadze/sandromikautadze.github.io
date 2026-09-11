@@ -9,9 +9,5 @@
 </main>
 {{ partial "footer.html" . }}
 {{ partial "plotly-loader.html" . }}
-<script>
-// ponytail: theme toggle; explicit choice persists, otherwise the OS preference applies
-document.querySelector('.theme').addEventListener('click',()=>{const h=document.documentElement;const cur=h.dataset.theme||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');const next=cur==='light'?'dark':'light';h.dataset.theme=next;try{localStorage.setItem('theme',next)}catch(e){}});
-</script>
 </body>
 </html>

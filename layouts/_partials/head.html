@@ -1,5 +1,4 @@
 <meta charset="utf-8">
-<script>try{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="20c87f73-437a-40aa-bde6-eb3140918333"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {{- $title := cond .IsHome .Site.Title (printf "%s · %s" .Title .Site.Title) -}}
@@ -14,7 +13,6 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:image" content="{{ "images/og.png" | absURL }}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@theaitemp">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f0">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131211">
 <link rel="icon" href="/favicon.ico">
@@ -23,7 +21,7 @@
 <link rel="preload" href="/fonts/Fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
 {{ if .Params.math }}<link rel="stylesheet" href="/katex/katex.min.css">{{ end }}
-{{ with slice (resources.Get "css/style.css") (resources.Get "css/chroma.css") | resources.Concat "css/site.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
+{{ with resources.Get "css/style.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
 {{ if .IsHome }}
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "Person" "name" .Site.Title "url" .Site.BaseURL "image" (resources.Get "images/profile.jpg").Permalink "jobTitle" "AI Researcher" "email" .Site.Params.email "sameAs" (slice .Site.Params.github .Site.Params.linkedin .Site.Params.medium .Site.Params.x) | jsonify (dict "indent" "  ") | safeJS }}</script>
 {{ else if eq .Section "blog" }}

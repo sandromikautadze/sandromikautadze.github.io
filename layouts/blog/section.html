@@ -1,8 +1,8 @@
 {{ define "main" }}
 <h1 class="display">{{ .Title }}</h1>
 {{ $items := slice }}
-{{ range .RegularPages }}{{ $items = $items | append (dict "date" (.Date.Format "2006-01-02") "title" .Title "url" .RelPermalink "desc" .Description "tags" (.Params.tags | default slice) "src" "") }}{{ end }}
-{{ range hugo.Data.medium }}{{ $items = $items | append (dict "date" (string .date) "title" .title "url" .url "desc" .summary "tags" slice "src" "Medium") }}{{ end }}
+{{ range .RegularPages }}{{ $items = $items | append (dict "date" (.Date.Format "2006-01-02") "title" .Title "url" .RelPermalink "src" "") }}{{ end }}
+{{ range hugo.Data.medium }}{{ $items = $items | append (dict "date" (string .date) "title" .title "url" .url "src" "Medium") }}{{ end }}
 <ul class="rows">
 {{ range sort $items "date" "desc" }}
   <li>

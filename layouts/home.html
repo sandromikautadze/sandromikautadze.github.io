@@ -1,5 +1,4 @@
 {{ define "main" }}
-{{ $d := hugo.Data.home }}
 <section class="identity">
   <div class="side">
     <div class="pics">
@@ -7,8 +6,10 @@
         {{ range slice
           (dict "src" "images/profile.jpg" "alt" "Portrait of Sandro Mikautadze" "cap" "Me drinking" "pos" "")
           (dict "src" "images/extra-1.jpg" "alt" "Sandro in a hammock" "cap" "Me sleeping" "pos" "50% 62%")
-          (dict "src" "images/img_9490.jpg" "alt" "Sandro, years ago" "cap" "Me younger" "pos" "") }}
-        {{ $img := (resources.Get .src).Resize "x480 q85" }}
+          (dict "src" "images/img_9490.jpg" "alt" "Sandro, years ago" "cap" "Me younger" "pos" "")
+          (dict "src" "images/gelato.jpg" "alt" "Sandro on a Paris street, holding an empty cone, the gelato on the ground" "cap" "Me sad cause gelato fell" "pos" "50% 0%")
+          (dict "src" "images/surf.jpg" "alt" "Sandro carrying a surfboard on a beach at sunset" "cap" "Me tryna look cool" "pos" "50% 70%") }}
+        {{ $img := (resources.Get .src).Resize "x1000 Lanczos q88" }}
         <img src="{{ $img.RelPermalink }}" alt="{{ .alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" data-caption="{{ .cap }}"{{ with .pos }} style="object-position: {{ . }}"{{ end }}>
         {{ end }}
       </div>
@@ -22,42 +23,21 @@
   {{ .Content }}
 </section>
 
-<section>
-  <h2 class="label">News</h2>
-  {{ $show := 4 }}{{ $news := sort $d.news "date" "desc" }}
-  <ul class="news">
-  {{ range first $show $news }}{{ partial "news-item.html" . }}{{ end }}
-  </ul>
-  {{ if gt (len $news) $show }}
-  <details class="more">
-    <summary class="mono btn"><span class="more-open">See all</span><span class="more-close">See less</span></summary>
-    <ul class="news">
-    {{ range after $show $news }}{{ partial "news-item.html" . }}{{ end }}
-    </ul>
-  </details>
-  {{ end }}
-</section>
 <script>
 (() => {
   const track = document.querySelector(".track"), cap = document.querySelector(".cap");
   const imgs = [...track.children], n = imgs.length;
   track.appendChild(imgs[0].cloneNode(true));
-  let i = 0;
-  const snapToStart = () => {
-    if (i < n) return;
-    track.style.transition = "none";
-    i = 0; track.style.transform = "none";
-    track.offsetHeight;
-    track.style.transition = "";
-  };
+  const w = () => track.clientWidth, index = () => Math.round(track.scrollLeft / w());
   document.querySelector(".next").addEventListener("click", () => {
-    if (i >= n) return;
-    i++;
-    track.style.transform = `translateX(-${i * 100 / (n + 1)}%)`;
-    cap.textContent = imgs[i % n].dataset.caption;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) snapToStart();
+    if (index() >= n) return;
+    track.scrollBy({ left: w(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   });
-  track.addEventListener("transitionend", snapToStart);
+  track.addEventListener("scroll", () => {
+    const i = index();
+    cap.textContent = imgs[i % n].dataset.caption;
+    if (Math.abs(track.scrollLeft - n * w()) < 1) track.scrollTo({ left: 0, behavior: "instant" });
+  }, { passive: true });
 })();
 </script>
 {{ end }}

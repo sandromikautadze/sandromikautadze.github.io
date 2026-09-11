@@ -23,5 +23,5 @@ disableKinds = ["taxonomy", "term"]
   startLevel = 2
   endLevel = 3
 [markup.highlight]
-  noClasses = false
+  noClasses = true
   lineNos = false
