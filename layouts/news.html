@@ -1,13 +1,13 @@
 {{ define "main" }}
 <h1 class="display">{{ .Title }}</h1>
 {{ $show := 4 }}{{ $news := sort hugo.Data.news "date" "desc" }}
-<ul class="news">
+<ul class="rows">
 {{ range first $show $news }}{{ partial "news-item.html" . }}{{ end }}
 </ul>
 {{ if gt (len $news) $show }}
 <details class="more">
   <summary class="mono btn"><span class="more-open">See all</span><span class="more-close">See less</span></summary>
-  <ul class="news">
+  <ul class="rows">
   {{ range after $show $news }}{{ partial "news-item.html" . }}{{ end }}
   </ul>
 </details>

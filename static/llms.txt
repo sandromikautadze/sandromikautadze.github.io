@@ -4,7 +4,7 @@
 
 ## Pages
 
-- [About](https://sandromikautadze.github.io/): bio, news
+- [About](https://sandromikautadze.github.io/): bio
 - [News](https://sandromikautadze.github.io/news/): recent updates
 - [Things](https://sandromikautadze.github.io/things/): publications, hackathons, university projects
 - [Blog](https://sandromikautadze.github.io/blog/): technical posts, plus essays on Medium
@@ -14,7 +14,7 @@
 
 ## Contact
 
-- Email: sandro.mikautadze@polytechnique.edu
+- Email: sandromikautadze@yahoo.com
 - GitHub: https://github.com/sandromikautadze
 - LinkedIn: https://www.linkedin.com/in/sandro-mikautadze/
 - X: https://x.com/theaitemp

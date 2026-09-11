@@ -3,19 +3,14 @@
   <div class="side">
     <div class="pics">
       <div class="track">
-        {{ range slice
-          (dict "src" "images/profile.jpg" "alt" "Portrait of Sandro Mikautadze" "cap" "Me drinking" "pos" "")
-          (dict "src" "images/extra-1.jpg" "alt" "Sandro in a hammock" "cap" "Me sleeping" "pos" "50% 62%")
-          (dict "src" "images/img_9490.jpg" "alt" "Sandro, years ago" "cap" "Me younger" "pos" "")
-          (dict "src" "images/gelato.jpg" "alt" "Sandro on a Paris street, holding an empty cone, the gelato on the ground" "cap" "Me sad cause gelato fell" "pos" "50% 0%")
-          (dict "src" "images/surf.jpg" "alt" "Sandro carrying a surfboard on a beach at sunset" "cap" "Me tryna look cool" "pos" "50% 70%") }}
-        {{ $img := (resources.Get .src).Resize "x1000 Lanczos q88" }}
-        <img src="{{ $img.RelPermalink }}" alt="{{ .alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" data-caption="{{ .cap }}"{{ with .pos }} style="object-position: {{ . }}"{{ end }}>
+        {{ range hugo.Data.photos }}
+        {{ $img := (resources.Get .src).Resize "x1000 webp Lanczos q85" }}
+        <img src="{{ $img.RelPermalink }}" alt="{{ .alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" data-caption="{{ .caption }}"{{ with .pos }} style="object-position: {{ . }}"{{ end }}>
         {{ end }}
       </div>
       <button class="next" type="button" aria-label="Next photo">&rarr;</button>
     </div>
-    <p class="mono cap" aria-live="polite">Me drinking</p>
+    <p class="mono cap" aria-live="polite">{{ (index hugo.Data.photos 0).caption }}</p>
     <p class="flags"><img src="/icons/italy.svg" alt="Italy" width="16" height="16"><img src="/icons/georgia.svg" alt="Georgia" width="16" height="16"></p>
     <p class="social">{{ partial "social.html" . }}</p>
   </div>

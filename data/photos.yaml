@@ -1,0 +1,19 @@
+# pos is CSS object-position for the crop; omit for centre
+- src: images/party.jpg
+  alt: Portrait of Sandro Mikautadze
+  caption: Me drinking
+- src: images/hammock.jpg
+  alt: Sandro in a hammock
+  caption: Me sleeping
+  pos: 50% 62%
+- src: images/younger.jpg
+  alt: Sandro, years ago
+  caption: Me younger
+- src: images/gelato.jpg
+  alt: Sandro on a Paris street, holding an empty cone, the gelato on the ground
+  caption: Me sad cause gelato fell
+  pos: 50% 0%
+- src: images/surf.jpg
+  alt: Sandro carrying a surfboard on a beach at sunset
+  caption: Me tryna look cool
+  pos: 50% 70%
