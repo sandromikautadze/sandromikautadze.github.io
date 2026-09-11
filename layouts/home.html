@@ -33,11 +33,14 @@
     if (index() >= n) return;
     track.scrollBy({ left: w(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   });
+  // ponytail: iOS stops firing scroll before the snap settles, so the wrap runs on scrollend with a debounce fallback
+  const wrap = () => { if (track.scrollLeft >= n * w() - 2) track.scrollTo({ left: 0, behavior: "instant" }); };
+  let settle;
   track.addEventListener("scroll", () => {
-    const i = index();
-    cap.textContent = imgs[i % n].dataset.caption;
-    if (Math.abs(track.scrollLeft - n * w()) < 1) track.scrollTo({ left: 0, behavior: "instant" });
+    cap.textContent = imgs[index() % n].dataset.caption;
+    clearTimeout(settle); settle = setTimeout(wrap, 150);
   }, { passive: true });
+  track.addEventListener("scrollend", wrap);
 })();
 </script>
 {{ end }}

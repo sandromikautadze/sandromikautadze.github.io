@@ -56,7 +56,7 @@ section { margin-bottom: var(--s6); }
 .pics { position: relative; width: 13rem; height: 16rem; overflow: hidden; border-radius: 8px; background: var(--surface); }
 .track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .track::-webkit-scrollbar { display: none; }
-.track img { display: block; flex: 0 0 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+.track img { display: block; flex: 0 0 100%; height: 100%; object-fit: cover; scroll-snap-align: start; scroll-snap-stop: always; }
 .cap { color: var(--muted); font-size: .75rem; margin: var(--s2) 0 0; }
 .next { position: absolute; top: 50%; right: .4rem; transform: translateY(-50%); width: 1.7rem; height: 1.7rem; border: 0; border-radius: 50%; background: rgba(0,0,0,.45); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; padding: 0; }
 .next:hover { background: rgba(0,0,0,.7); }
