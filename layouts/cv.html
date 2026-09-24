@@ -4,7 +4,7 @@
   <h2 class="label">Education</h2>
   <ul class="rows cv">
   {{ range hugo.Data.cv.education }}
-    <li><span class="mono date">{{ .when }}</span><span><strong>{{ .where }}</strong><span class="mono meta inline">{{ .city }}</span><span class="role">{{ .what }}</span></span></li>
+    <li><span class="ui date">{{ .when }}</span><span><strong>{{ .where }}</strong><span class="ui meta inline">{{ .city }}</span><span class="role">{{ .what }}</span></span></li>
   {{ end }}
   </ul>
 </section>
@@ -12,7 +12,7 @@
   <h2 class="label">Experience</h2>
   <ul class="rows cv">
   {{ range hugo.Data.cv.experience }}
-    <li><span class="mono date">{{ .when }}</span><span><strong>{{ .where }}</strong><span class="mono meta inline">{{ .city }}</span><span class="role">{{ .role }}</span><span class="what">{{ .what }}</span></span></li>
+    <li><span class="ui date">{{ .when }}</span><span><strong>{{ .where }}</strong><span class="ui meta inline">{{ .city }}</span><span class="role">{{ .role }}</span><span class="what">{{ .what }}</span></span></li>
   {{ end }}
   </ul>
 </section>

@@ -8,12 +8,12 @@
 <article class="prose">
   <header class="post-head">
     <h1 class="display">{{ .Title }}</h1>
-    <p class="mono meta">{{ .Date.Format "2006-01-02" }} · {{ .ReadingTime }} min{{ with .Params.tags }} · {{ delimit . ", " }}{{ end }}</p>
+    <p class="ui meta">{{ .Date.Format "2006-01-02" }} · {{ .ReadingTime }} min{{ with .Params.tags }} · {{ delimit . ", " }}{{ end }}</p>
   </header>
   {{ .Content }}
   <footer class="post-foot">
     <details class="cite">
-      <summary class="mono">Cite this post</summary>
+      <summary class="ui">Cite this post</summary>
 <pre><code>@misc{mikautadze{{ .Date.Format "2006" }}{{ .File.ContentBaseName | replaceRE "[^a-z]" "" }},
   author = {Mikautadze, Sandro},
   title  = { {{- .Title -}} },
@@ -21,7 +21,7 @@
   url    = { {{- .Permalink -}} }
 }</code></pre>
     </details>
-    <nav class="pager mono">
+    <nav class="pager ui">
       {{ with .NextInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
       {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
     </nav>
@@ -34,8 +34,23 @@ const links=[...document.querySelectorAll('.toc a')];
 const byId=Object.fromEntries(links.map(a=>[a.hash.slice(1),a]));
 const io=new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting){links.forEach(a=>a.removeAttribute('aria-current'));byId[e.target.id]?.setAttribute('aria-current','true');}}},{rootMargin:'0px 0px -70% 0px'});
 Object.keys(byId).forEach(id=>{const h=document.getElementById(id);if(h)io.observe(h)});
-const bar=document.querySelector('.progress i');
-const prog=()=>{const d=document.documentElement;bar.style.height=(100*d.scrollTop/(d.scrollHeight-d.clientHeight)).toFixed(1)+'%'};
-addEventListener('scroll',prog,{passive:true});prog();
+// one dot per heading, placed where scrolling to that heading puts the fill, so gaps read as section length
+const doc=document.documentElement,rail=document.querySelector('.progress'),bar=rail.querySelector('i');
+const heads=Object.keys(byId).map(id=>document.getElementById(id)).filter(Boolean);
+const dots=heads.map(()=>rail.appendChild(document.createElement('b')));
+const prog=()=>{const p=doc.scrollTop/(doc.scrollHeight-doc.clientHeight);bar.style.height=(100*p).toFixed(1)+'%';dots.forEach(d=>d.classList.toggle('on',p>=d.dataset.at))};
+const place=()=>{const max=doc.scrollHeight-doc.clientHeight;heads.forEach((h,i)=>{const at=Math.max(0,Math.min(1,(h.getBoundingClientRect().top+scrollY-parseFloat(getComputedStyle(h).scrollMarginTop))/max));dots[i].dataset.at=at;dots[i].style.top=(100*at).toFixed(2)+'%'});prog()};
+addEventListener('scroll',prog,{passive:true});
+// ponytail: footnotes mirrored into the margin as LessWrong does; the list at the bottom stays for narrow screens and screen readers
+for(const ref of document.querySelectorAll('.prose .footnote-ref')){
+  const note=document.getElementById(ref.hash.slice(1));if(!note)continue;
+  const side=document.createElement('span');side.className='sidenote';side.setAttribute('aria-hidden','true');
+  side.innerHTML=`<span class="sn-n">${ref.textContent}.</span><span class="sn-body"></span>`;
+  side.lastChild.append(...note.cloneNode(true).childNodes);
+  side.querySelector('.footnote-backref')?.remove();side.querySelectorAll('a').forEach(a=>a.tabIndex=-1);
+  ref.parentElement.after(side);
+}
+// images, plots and sidenotes change the page height after load, which moves every dot
+new ResizeObserver(place).observe(document.body);
 </script>
 {{ end }}

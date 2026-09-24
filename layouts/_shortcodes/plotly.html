@@ -1,3 +1,3 @@
 {{- /* usage: {{< plotly src="/plots/name.json" height="360" >}} ; json from Python: fig.write_json("static/plots/name.json") */ -}}
 {{- if not (.Page.Store.Get "plotly") }}{{ .Page.Store.Set "plotly" true }}<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>{{ end -}}
-<figure class="plot-wrap"><div class="plot" data-src="{{ .Get "src" }}" style="height:{{ .Get "height" | default "360" }}px"></div>{{ with .Inner }}<figcaption class="mono">{{ . | markdownify }}</figcaption>{{ end }}</figure>
+<figure class="plot-wrap"><div class="plot" data-src="{{ .Get "src" }}" style="height:{{ .Get "height" | default "360" }}px"></div>{{ with .Inner }}<figcaption class="ui">{{ . | markdownify }}</figcaption>{{ end }}</figure>

@@ -20,7 +20,7 @@ p(y_i = 1 \mid h_i) &= \sigma\!\left(w^\top h_i^{(\ell)} + b\right), \\
 \end{aligned}
 $$
 
-The probe accuracy on held-out data is what people report.{{< sidenote >}}Usually with a 50/50 class balance, so 50% is chance. Check this before being impressed by 71%.{{< /sidenote >}} The claim it licenses is weaker than it looks: linear decodability says the information is *present*, not that the model *uses* it.[^1]
+The probe accuracy on held-out data is what people report.[^balance] The claim it licenses is weaker than it looks: linear decodability says the information is *present*, not that the model *uses* it.[^1]
 
 ## Two ways to be fooled
 
@@ -76,4 +76,5 @@ def ablate(H, w):
 
 Report probe accuracy and the ablation effect together, per layer, or report neither.
 
+[^balance]: Usually with a 50/50 class balance, so 50% is chance. Check this before being impressed by 71%.
 [^1]: The distinction is made carefully in Belinkov, *Probing Classifiers: Promises, Shortcomings, and Advances* [arXiv:2102.12452](https://arxiv.org/abs/2102.12452).

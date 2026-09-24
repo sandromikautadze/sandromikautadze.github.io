@@ -27,7 +27,7 @@ Open http://localhost:1313. Drafts and future-dated posts are hidden unless you 
 
 Inline maths `$x$`, display maths `$$ ... $$`, footnotes `[^1]`, GFM tables, fenced code with a language tag for highlighting.
 
-- Margin note: `{{< sidenote >}}text{{< /sidenote >}}`
+- Footnotes `[^name]` also show in the right margin on wide screens, LessWrong style
 - Interactive figure: export from Python with `fig.write_json("static/plots/name.json")`, then `{{< plotly src="/plots/name.json" >}}caption{{< /plotly >}}`
 
 ## LaTeX
@@ -36,4 +36,4 @@ Equations are rendered to HTML at build time by Hugo's bundled KaTeX, so the rea
 
 ## Fonts
 
-`static/fonts/` holds Latin subsets of Fraunces, Newsreader and JetBrains Mono with unused variable axes pinned. Regenerate only if you change typefaces.
+`static/fonts/` holds Latin subsets of ET Book (headings, from tufte-css, MIT) and JetBrains Mono (code only). All other text uses the system Palatino stack, which is LessWrong's fallback for its licensed Warnock Pro. Regenerate only if you change typefaces.

@@ -12,9 +12,10 @@
         <img src="{{ $img.RelPermalink }}" alt="{{ .alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" data-caption="{{ .caption }}"{{ with .pos }} style="object-position: {{ . }}"{{ end }}>
         {{ end }}
       </div>
-      <button class="next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button class="arrow prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button class="arrow next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
-    <p class="mono cap" aria-live="polite">{{ (index hugo.Data.photos 0).caption }}</p>
+    <p class="ui cap" aria-live="polite">{{ (index hugo.Data.photos 0).caption }}</p>
     <p class="flags"><img src="/icons/italy.svg" alt="Italy" width="16" height="16"><img src="/icons/georgia.svg" alt="Georgia" width="16" height="16"></p>
     <p class="social">{{ partial "social.html" . }}</p>
   </div>
@@ -29,6 +30,11 @@
   document.querySelector(".next").addEventListener("click", () => {
     if (index() >= n) return;
     track.scrollBy({ left: w(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  });
+  document.querySelector(".prev").addEventListener("click", () => {
+    // on the first photo, hop to the trailing clone of it so the step back lands on the last photo
+    if (index() === 0) track.scrollTo({ left: n * w(), behavior: "instant" });
+    track.scrollBy({ left: -w(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   });
   // ponytail: iOS stops firing scroll before the snap settles, so the wrap runs on scrollend with a debounce fallback
   const wrap = () => { if (track.scrollLeft >= n * w() - 2) track.scrollTo({ left: 0, behavior: "instant" }); };

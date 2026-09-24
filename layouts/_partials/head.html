@@ -12,13 +12,11 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:image" content="{{ "images/og.png" | absURL }}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f0">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#131211">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
 <link rel="icon" href="/favicon.ico">
 {{ range .AlternativeOutputFormats }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">{{ end }}
-<link rel="preload" href="/fonts/Newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/Fraunces-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/JetBrainsMono-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ETBook-normal.woff2" as="font" type="font/woff2" crossorigin>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="20c87f73-437a-40aa-bde6-eb3140918333"></script>
 {{ if .Params.math }}<link rel="stylesheet" href="/katex/katex.min.css">{{ end }}
 {{ with resources.Get "css/style.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}

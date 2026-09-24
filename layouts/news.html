@@ -6,7 +6,7 @@
 </ul>
 {{ if gt (len $news) $show }}
 <details class="more">
-  <summary class="mono btn"><span class="more-open">See all</span><span class="more-close">See less</span></summary>
+  <summary class="ui btn"><span class="more-open">See all</span><span class="more-close">See less</span></summary>
   <ul class="rows">
   {{ range after $show $news }}{{ partial "news-item.html" . }}{{ end }}
   </ul>

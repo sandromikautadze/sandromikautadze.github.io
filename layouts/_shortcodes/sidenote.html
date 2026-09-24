@@ -1,2 +1,0 @@
-{{- /* usage: {{< sidenote >}}text{{< /sidenote >}} ; margin note on wide screens, inline note otherwise */ -}}
-<label class="sn-toggle" for="sn-{{ .Ordinal }}"></label><input type="checkbox" id="sn-{{ .Ordinal }}" class="sn-check"><span class="sidenote">{{ .Inner | markdownify }}</span>

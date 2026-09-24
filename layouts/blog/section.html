@@ -6,8 +6,8 @@
 <ul class="rows">
 {{ range sort $items "date" "desc" }}
   <li>
-    <span class="mono date">{{ .date }}</span>
-    <span><a href="{{ .url }}"{{ if .src }} target="_blank" rel="noopener"{{ end }}>{{ .title }}</a>{{ with .src }} <span class="mono tag">{{ . }}</span>{{ end }}</span>
+    <span class="ui date">{{ .date }}</span>
+    <span><a href="{{ .url }}"{{ if .src }} target="_blank" rel="noopener"{{ end }}>{{ .title }}</a>{{ with .src }} <span class="ui tag">{{ . }}</span>{{ end }}</span>
   </li>
 {{ end }}
 </ul>
